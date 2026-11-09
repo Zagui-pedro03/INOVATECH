@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Criação de evento</title>
+
+    <link rel="icon" type="image/png" href="/assets/img/favicon/icone_2.png">
+    <link rel="stylesheet" href="/css/criar-evento.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Reddit+Sans:ital,wght@0,200..900;1,200..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet"
+    >
+</head>
+
+<body>
+    <div class="linkVoltar">
+    <a href="/eventos">Voltar</a>
+    <div class="linha"></div>
+    </div>
+    <form action="" id="formulario" method="POST">
+
+        <h1>Novo evento</h1>
+
+        <!-- Nome -->
+        <div class="campo">
+            <label for="nome">Nome do evento</label>
+            <div class="linha"></div>
+
+            <input
+                type="text"
+                id="nome"
+                name="nome"
+                placeholder="Nome do evento"
+            >
+            <p id="txtNome"></p>
+        </div>
+        <div class="campo">
+            <label for="tema">Tema do evento</label>
+            <div class="linha"></div>
+
+            <select name="tema" id="tema">
+                <option value="nada" selected>Selecione um tema</option>
+                <option value="Tecnologia e Inovação">Tecnologia e Inovação</option>
+                <option value="Educação e Conhecimento">Educação e Conhecimento</option>
+                <option value="Carreira e Networking">Carreira e Networking</option>
+                <option value="Social">Social</option>
+                <option value="Esportes e Atividades Físicas">Esportes e Atividades Físicas</option>
+                <option value="Música e Entretenimento">Música e Entretenimento</option>
+                <option value="Arte e Criatividade">Arte e Criatividade</option>
+                <option value="Comunidade e Voluntariado">Comunidade e Voluntariado</option>
+                <option value="Natureza e Lazer">Natureza e Lazer</option>
+                <option value="Gastronomia">Gastronomia</option>
+                <option value="Religião e Espiritualidade">Religião e Espiritualidade</option>
+                <option value="Comemorativo">Comemorativo</option>
+                <option value="Competições e Torneios">Competições e Torneios</option>
+            </select>
+            <p id="txtTema"></p>
+        </div>
+
+        <!-- Data e local -->
+        <div class="linha-campos">
+
+            <div class="campo">
+                <label for="data">Data</label>
+                <div class="linha"></div>
+
+                <input
+                    type="date"
+                    id="data"
+                    name="data"
+                >
+                <p id="txtData"></p>
+            </div>
+
+            <div class="campo">
+                <label for="local">Local</label>
+                <div class="linha"></div>
+
+                <input
+                    type="text"
+                    id="local"
+                    name="local"
+                    placeholder="Local do evento"
+                >
+                <p id="txtLocal"></p>
+            </div>
+
+        </div>
+
+        <!-- Horários -->
+        <div class="linha-campos">
+
+            <div class="campo">
+                <label for="horarioInicio">Horário de início</label>
+                <div class="linha"></div>
+
+                <input
+                    type="time"
+                    id="horarioInicio"
+                    name="horarioInicio"
+                >
+                <p id="txtHorarioInicio"></p>
+            </div>
+
+            <div class="campo">
+                <label for="horarioTermino">Horário de término</label>
+                <div class="linha"></div>
+
+                <input
+                    type="time"
+                    id="horarioTermino"
+                    name="horarioTermino"
+                >
+                <p id="txtHorarioTermino"></p>
+            </div>
+
+        </div>
+
+        <!-- Limite de pessoas -->
+        <div class="campo campo-limite">
+
+            <label for="tipoLimite">Limite de pessoas</label>
+            <div class="linha"></div>
+
+            <select id="tipoLimite" name="tipoLimite">
+                <option value="definir" selected>Definir</option>
+                <option value="ilimitado">Ilimitado</option>
+            </select>
+
+            <div id="containerVagas">
+                <label for="vagas" id="txtVaga">Quantidade de pessoas</label>
+
+                <input
+                    type="number"
+                    id="vagas"
+                    name="vagas"
+                    placeholder="Ex.: 50"
+                    min="1"
+                    step="1"
+                >
+                <p id="txtVagas"></p>
+            </div>
+
+        </div>
+
+        <!-- Descrição -->
+        <div class="descricao">
+
+            <div class="descricao-title">
+                <h2>Descrição</h2>
+            </div>
+
+            <textarea
+                name="descricao"
+                id="descricao"
+                placeholder="Descreva o evento"
+            ></textarea>
+            <p id="txtDescricao"></p>
+        </div>
+
+        <!-- Botão -->
+        <div class="btn">
+            <button type="submit">Criar evento</button>
+        </div>
+
+    </form>
+
+    <script type="module" src="/js/criar-evento.js"></script>
+
+</body>
+</html>

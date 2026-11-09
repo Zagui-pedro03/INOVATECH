@@ -1,0 +1,89 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: #E2E2E2;
+    font-family: "Reddit Sans", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 100vh;
+    gap: 30px;
+}
+
+form{
+    background-color: #F6F6F6;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 5px;
+}
+form input{
+    margin-bottom: 30px;
+    border: none;
+    background-color: #EAEAEA;
+    height: 32px;
+    width: 400px;
+    border-radius: 3px;
+    font-size: 15px;
+    font-family: "Reddit Sans", sans-serif;
+    padding-left: 15px;
+    color: rgb(27, 27, 27);
+    }
+form input::placeholder{
+    font-family: "Reddit Sans", sans-serif;
+    font-size: 15px;
+    color: #adadad;
+}
+form input:focus{
+    
+    outline: 1px rgba(56, 1, 88, 0.589) solid;
+}
+h1{
+    margin-bottom: 40px;
+    font-weight: 500;
+    color: #2B014B;
+}
+.btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+button{
+    font-family: "Reddit Sans", sans-serif;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    color: white;
+    background-color: #340272;
+    padding: 10px;
+    width: 250px;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+}
+label{
+    margin-bottom: 5px;
+    font-size: 19px;
+    color: #2B0068;
+    font-weight: 500;
+}
+a{
+    color: #5D3299;
+    text-decoration: none;
+}
+span{
+    color: #8E8E8E;
+}
+#erro{
+    background-color: rgb(255, 35, 35);
+    padding: 30px;
+    color: white;
+    border-radius: 7px;
+    box-shadow: 0px 2px 5px rgb(39, 0, 0);
+}

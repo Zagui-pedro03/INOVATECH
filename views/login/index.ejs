@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+
+    <link rel="icon" type="image/png" href="/assets/img/favicon/icone_2.png">
+    <link rel="stylesheet" href="/css/login.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Reddit+Sans:ital,wght@0,200..900;1,200..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <form method="POST" id="formulario">
+      <h1>Login</h1>
+      <label for="email">Email</label>
+      <input
+        type="text"
+        id="email"
+        name="email"
+        placeholder="examplo@gmail.com"
+      />
+      <label for="senha">Senha</label>
+      <input
+        type="password"
+        id="senha"
+        name="senha"
+        placeholder="Digite a senha da conta"
+      />
+      <div class="btn">
+        <button type="submit">Entrar</button>
+        <span
+          >Não possui uma conta? <a href="cadastros">Clique aqui</a> para
+          realizar o cadastro</span
+        >
+      </div>
+    </form>
+    <div id="erro" style="display: none;">
+      <p>Email ou senha inválidos</p>
+    </div>
+  </body>
+  <script type="module" src="js/login.js"></script>
+</html>

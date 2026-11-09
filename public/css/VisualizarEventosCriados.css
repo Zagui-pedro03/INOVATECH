@@ -1,0 +1,698 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background-color: #E2E2E2;
+    font-family: "Reddit Sans", "Roboto", sans-serif;
+    color: #24212B;
+}
+
+/* Container principal */
+
+.eventos-container {
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
+    max-width: 900px;
+    min-height: 500px;
+    margin: 45px auto;
+    padding: 35px;
+    gap: 25px;
+    position: relative;
+    border-radius: 16px;
+    border: 1px solid #D8D0E5;
+    box-shadow: 0 6px 20px rgba(43, 0, 104, 0.08);
+}
+
+/* Título do evento */
+
+#titulo {
+    padding-bottom: 20px;
+    border-bottom: 2px solid #EAE3F3;
+}
+
+#nomeEvento {
+    color: #2B0068;
+    font-size: 30px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+#temaEvento {
+    color: #6B4B91;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 8px;
+}
+
+/* Descrição e limite de pessoas */
+
+#detalhes {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+#descricao {
+    color: #494451;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+#limitePessoas {
+    width: fit-content;
+    background-color: #F0E8FA;
+    color: #340272;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Informações do evento */
+
+#info-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#info {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(4, minmax(0, 1fr));
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 32px;
+    width: 70%;
+    background-color: #F7F5FA;
+    border-radius: 12px;
+    border: 1px solid #E9E1F2;
+}
+
+#info p {
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+/* Criador e participantes */
+
+#adicional {
+    display: flex;
+    gap: 4px;
+    padding-top: 20px;
+    border-top: 1px solid #EAE3F3;
+}
+
+#criador {
+    color: #2B0068;
+    font-weight: 500;
+}
+
+#inscritos {
+    width: 100%;
+    background-color: rgba(170, 157, 181, 0.256);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    border-radius: 5px;
+    margin-bottom: 60px;
+}
+
+.inscrito {
+    display: flex;
+    width: 600px;
+    background-color: white;
+    padding: 7px;
+    border-radius: 4px;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-bottom: 15px;
+}
+
+.inscrito:hover {
+    transform: scale(1.03);
+    box-shadow: 0px 2px 15px rgba(56, 0, 102, 0.597);
+}
+
+.inscrito button {
+    border: none;
+    background-color: #2B0068;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.inscrito button a {
+    font-family: "Reddit Sans", sans-serif;
+    color: white;
+    text-decoration: none;
+}
+
+h3 {
+    font-weight: 600;
+}
+
+/* Ações */
+
+.acoes {
+    display: flex;
+    gap: 15px;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+}
+
+#deletar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgb(253, 63, 63);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#deletar:hover {
+    background-color: rgb(106, 19, 19);
+}
+
+#editar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgb(237, 255, 44);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#editar:hover {
+    background-color: rgb(144, 144, 0);
+}
+
+.acoes #editar,
+.acoes #deletar {
+    cursor: pointer;
+}
+
+.acoes #editar:hover,
+.acoes #deletar:hover {
+    transform: scale(1.08);
+}
+
+/* ============================= */
+/* CAMPOS DE EDIÇÃO */
+/* ============================= */
+
+#formularioEdicao {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Estilização geral dos campos */
+
+.campo-edicao {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 12px 14px;
+
+    border: 1px solid #D8CCE8;
+    border-radius: 8px;
+
+    background-color: #FCFAFF;
+    color: #2B0068;
+
+    font-family: "Reddit Sans", "Roboto", sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+/* Placeholder */
+
+.campo-edicao::placeholder {
+    color: #9486A5;
+    opacity: 1;
+}
+
+/* Foco */
+
+.campo-edicao:focus {
+    background-color: #FFFFFF;
+    border-color: #5B16A5;
+    box-shadow: 0 0 0 3px rgba(91, 22, 165, 0.13);
+}
+
+/* Selects */
+
+select.campo-edicao {
+    cursor: pointer;
+}
+
+/* Datas e horários */
+
+input[type="date"].campo-edicao,
+input[type="time"].campo-edicao {
+    min-height: 45px;
+    cursor: pointer;
+}
+
+/* Quantidade de vagas */
+
+input[type="number"].campo-edicao {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+input[type="number"].campo-edicao::-webkit-inner-spin-button,
+input[type="number"].campo-edicao::-webkit-outer-spin-button {
+    margin: 0;
+}
+
+/* Descrição */
+
+textarea.campo-edicao {
+    min-height: 130px;
+    resize: vertical;
+    overflow-wrap: anywhere;
+}
+
+/* IDs dos campos de edição */
+
+#inputNome,
+#selectTema,
+#inputDescricao,
+#definirLimitePessoas,
+#inputVagas,
+#inputData,
+#inputLocal,
+#inputHorarioInicio,
+#inputHorarioTermino {
+    font-family: "Reddit Sans", "Roboto", sans-serif;
+}
+
+/* Texto de limite ilimitado */
+
+#labelIlimitado {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin-top: 8px;
+    padding: 10px 14px;
+
+    border-radius: 8px;
+    background-color: #F0E8FA;
+    color: #340272;
+
+    font-size: 14px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+/* Botão de salvar */
+
+#atualizabtn {
+    display: none;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    border: 2px solid #2B0068;
+    color: #2B0068;
+    font-family: "Reddit Sans", sans-serif;
+    background-color: transparent;
+    padding: 8px;
+    font-size: 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+#atualizabtn:hover{
+    transform: scale(1.02);
+}
+/* Botões de salvar e cancelar */
+
+.botao-salvar,
+.botao-cancelar {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+
+    font-family: "Reddit Sans", "Roboto", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.botao-salvar {
+    background-color: #340272;
+    color: #FFFFFF;
+}
+
+.botao-salvar:hover {
+    background-color: #4C1096;
+    box-shadow: 0 4px 10px rgba(52, 2, 114, 0.18);
+    transform: translateY(-1px);
+}
+
+.botao-cancelar {
+    background-color: #EAE3F3;
+    color: #340272;
+}
+
+.botao-cancelar:hover {
+    background-color: #D9CBEA;
+}
+
+
+/* ADICIONAR USUÁRIOS PARA SE INSCREVEREM */
+
+#divConvidar{
+    border: 1px #5b16a567 solid;
+    background-color: #f9f4ff;
+    border-radius: 3px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#divConvidar #btnProcurar{
+    margin-top: 4px;
+    width: 160px;
+    border: 1px #3402726f solid;
+    background-color: white;
+    color: #270755a0;
+    font-size: 25px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background 0.2s,
+    color 0.2s;
+}
+#divConvidar button:hover{
+    background-color: #2B0068;
+    color: white;
+}
+
+
+/* ============================= */
+/* CONFIGURAÇÃO DOS BOTÕES DA PESQUISA DE ADD USUÁRIOS */
+/* ============================= */
+
+#containerBtn{
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+#containerBtn button{
+    width: 130px;
+    font-size: 15px;
+    padding: 5px;
+    font-family: "Reddit Sans", sans-serif;
+    border: 1px #340272 solid;
+}
+/* =========================
+   BOTÕES DE FILTRO
+========================= */
+
+#containerBtn {
+    display: flex;
+    gap: 12px;
+    margin: 15px 0;
+}
+
+#containerBtn button {
+    padding: 10px 20px;
+    background-color: #7041a6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#containerBtn button:hover {
+    background-color: #592c8b;
+}
+
+/* =========================
+   CAMPO DE PESQUISA
+========================= */
+
+#divPesquisa {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin: 15px 0;
+}
+
+#inputPesquisa {
+    flex: 1;
+    height: 35px;
+    min-width: 0;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    font-family: "Reddit Sans", sans-serif;
+}
+
+#inputPesquisa:focus {
+    border-color: #7041a6;
+}
+
+#divPesquisa #btnPesquisar{
+    
+    background-color: #270053;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-family: "Reddit Sans", sans-serif;
+    width: 90px;
+    transition: background 0.2s,
+    transform 0.2s
+    ;
+}
+#divPesquisa #btnPesquisar:hover{
+    background-color: #4C1096;
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   LISTAGEM COM OVERFLOW
+========================= */
+
+#listaUsuarios {
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding: 10px;
+    border: 1px solid #e2d9ed;
+    border-radius: 10px;
+    background-color: #faf7fd;
+}
+
+/* BARRA DE ROLAGEM */
+
+#listaUsuarios::-webkit-scrollbar {
+    width: 7px;
+}
+
+#listaUsuarios::-webkit-scrollbar-track {
+    background: #eee6f5;
+    border-radius: 10px;
+}
+
+#listaUsuarios::-webkit-scrollbar-thumb {
+    background: #9063bd;
+    border-radius: 10px;
+}
+
+/* =========================
+   CARD DO USUÁRIO
+========================= */
+
+.cardUsuario {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+
+    padding: 14px;
+    margin-bottom: 10px;
+
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 8px;
+}
+
+.infoUsuario {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.infoUsuario h4 {
+    margin: 0 0 5px;
+    color: #292929;
+}
+
+.infoUsuario p {
+    margin: 0;
+    font-size: 13px;
+    color: #777;
+}
+
+.btnAdicionar {
+    background-color: #7041a6;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: "Reddit Sans", sans-serif;
+    font-size: 15px;
+    transition: background 0.2s ease;
+}
+
+.btnAdicionar:hover {
+    background-color: #592c8b;
+}
+
+
+/* ============================= */
+/* BTN DE INSCRIÇÃO */
+/* ============================= */
+.divInscrito{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#inscrito{
+    border: none;
+    background-color: #270053;
+    font-family: "Reddit Sans", sans-serif;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    width: 40%;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.2s,
+    transform 0.2s
+    ;
+}
+#inscrito:hover{
+    background-color: #5B16A5;
+    transform: translateY(-3px);
+}
+
+/* ============================= */
+/* VALIDAÇÃO DOS CAMPOS */
+/* ============================= */
+
+.mensagem-validacao {
+    display: none;
+    font-size: 13px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.erro {
+    color: #D62828;
+}
+
+.sucesso {
+    color: #24843B;
+}
+
+.campo-edicao.errado {
+    border: 1px solid #D62828 !important;
+    box-shadow: 0 0 0 3px rgba(214, 40, 40, 0.10);
+}
+
+.campo-edicao.correto {
+    border: 1px solid #24843B !important;
+    box-shadow: 0 0 0 3px rgba(36, 132, 59, 0.10);
+}
+/* ============================= */
+/* RESPONSIVIDADE */
+/* ============================= */
+
+@media (max-width: 600px) {
+
+    .eventos-container {
+        width: 94%;
+        margin: 25px auto;
+        padding: 22px;
+        gap: 20px;
+    }
+
+    #nomeEvento {
+        font-size: 24px;
+    }
+
+    #info {
+        grid-template-columns: 1fr;
+        padding: 16px;
+        width: 100%;
+    }
+
+    .campo-edicao {
+        padding: 11px 12px;
+        font-size: 14px;
+    }
+
+    textarea.campo-edicao {
+        min-height: 110px;
+    }
+
+    .inscrito {
+        width: 100%;
+    }
+
+    #atualizabtn {
+        margin-bottom: 35px;
+    }
+}

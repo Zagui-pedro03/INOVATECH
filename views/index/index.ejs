@@ -1,0 +1,452 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-vindo | GatherVent</title>
+
+    <link rel="icon" type="image/png" href="/assets/img/favicon/icone_2.png">
+    <link rel="stylesheet" href="/css/bem-vindo.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Reddit+Sans:ital,wght@0,200..900;1,200..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet"
+    >
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Reddit Sans", sans-serif;
+        }
+
+        /* =========================
+           ESTRUTURA PRINCIPAL
+        ========================= */
+
+        .login-container {
+            display: flex;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        /* =========================
+           IMAGEM À ESQUERDA
+        ========================= */
+
+        .lado-imagem {
+            flex: 1;
+            min-width: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* =========================
+           PAINEL BRANCO
+        ========================= */
+
+        .lado-branco {
+            width: 40%;
+            flex-shrink: 0;
+            min-height: 100vh;
+
+            background-color: #f4f4f8;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 55px 35px;
+
+            position: relative;
+        }
+
+        /* FAIXA ROXA SUPERIOR */
+
+        .lado-branco::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background-color: #290064;
+        }
+
+        /* FAIXA ROXA INFERIOR */
+
+        .lado-branco::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background-color: #290064;
+        }
+
+        /* =========================
+           CONTEÚDO INTERNO
+        ========================= */
+
+        .conteudo-login {
+            width: 100%;
+            max-width: 420px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            gap: 30px;
+            text-align: center;
+        }
+
+        /* =========================
+           BOAS-VINDAS
+        ========================= */
+
+        .topo-login {
+            width: 100%;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .topo-login h2 {
+            font-size: 27px;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 15px;
+        }
+
+        /* =========================
+           LOGO
+        ========================= */
+
+        .logo-gathervent {
+            width: 210px;
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        /* =========================
+           SLOGAN
+        ========================= */
+
+        .slogan {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        /* =========================
+           BOTÕES
+        ========================= */
+
+        .botoes-login {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            gap: 15px;
+            width: 100%;
+            flex-wrap: wrap;
+
+            margin-top: 5px;
+        }
+
+        .btn-login {
+            display: inline-block;
+
+            min-width: 150px;
+            padding: 13px 18px;
+
+            text-decoration: none;
+            text-align: center;
+
+            background-color: #4b0082;
+            color: white;
+
+            border: 2px solid #4b0082;
+            border-radius: 8px;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+        .btn-login:hover {
+            background-color: #6a0dad;
+            border-color: #6a0dad;
+            transform: translateY(-2px);
+        }
+
+        .btn-entrar {
+            background-color: transparent;
+            color: #4b0082;
+        }
+
+        .btn-entrar:hover {
+            background-color: #e9def4;
+            border-color: #4b0082;
+        }
+
+        /* =========================
+           SOBRE A EMPRESA
+        ========================= */
+
+        .sobre-empresa {
+            width: 100%;
+            text-align: center;
+
+            border-top: 1px solid #d8c7eb;
+            padding-top: 25px;
+        }
+
+        .sobre-empresa h3 {
+            font-size: 22px;
+            color: #4b0082;
+
+            margin-bottom: 15px;
+        }
+
+        .sobre-empresa p {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.8;
+
+            max-width: 380px;
+            margin: 0 auto;
+        }
+
+        /* =========================
+           BENEFÍCIOS
+        ========================= */
+
+        .beneficios {
+            width: 100%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            gap: 12px;
+        }
+
+        .beneficio {
+            flex: 1;
+            text-align: center;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            gap: 10px;
+        }
+
+        .beneficio span {
+            font-size: 30px;
+        }
+
+        .beneficio p {
+            font-size: 12px;
+            font-weight: 600;
+            color: #4b0082;
+            line-height: 1.5;
+        }
+
+        /* =========================
+           MENSAGEM FINAL
+        ========================= */
+
+        .mensagem-final {
+            width: 100%;
+
+            background-color: #e8def4;
+            color: #4b0082;
+
+            padding: 17px 15px;
+
+            border-radius: 10px;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            text-align: center;
+        }
+
+        /* =========================
+           RESPONSIVIDADE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .lado-branco {
+                width: 48%;
+                padding: 45px 25px;
+            }
+
+            .conteudo-login {
+                gap: 25px;
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            .login-container {
+                flex-direction: column;
+            }
+
+            .lado-imagem {
+                width: 100%;
+                flex: none;
+                height: 220px;
+            }
+
+            .lado-branco {
+                width: 100%;
+                min-height: calc(100vh - 220px);
+                padding: 50px 25px;
+            }
+
+            .conteudo-login {
+                gap: 28px;
+            }
+
+            .topo-login h2 {
+                font-size: 24px;
+            }
+
+            .sobre-empresa h3 {
+                font-size: 20px;
+            }
+
+            .botoes-login {
+                gap: 12px;
+            }
+
+            .btn-login {
+                min-width: 135px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <!-- IMAGEM DO EVENTO -->
+
+        <div class="lado-imagem"></div>
+
+        <!-- PAINEL BRANCO -->
+
+        <div class="lado-branco">
+
+            <div class="conteudo-login">
+
+                <!-- BOAS-VINDAS E LOGO -->
+
+                <div class="topo-login">
+
+                    <h2>Bem-vindo ao</h2>
+
+                    <img
+                        src="/assets/img/logo_black.png"
+                        alt="GatherVent"
+                        class="logo-gathervent"
+                    >
+
+                    <p class="slogan">
+                        Conectando pessoas, criando experiências.
+                    </p>
+
+                </div>
+
+                <!-- BOTÕES DE ACESSO -->
+
+                <div class="botoes-login">
+
+                    <a href="/cadastros" class="btn-login">
+                        Criar conta
+                    </a>
+
+                    <a href="/login" class="btn-login btn-entrar">
+                        Fazer login
+                    </a>
+
+                </div>
+
+                <!-- SOBRE A EMPRESA -->
+
+                <div class="sobre-empresa">
+
+                    <h3>Muito mais que eventos!</h3>
+
+                    <p>
+                        Descubra eventos incríveis, conheça
+                        novas pessoas e compartilhe momentos
+                        inesquecíveis.
+
+                        A GatherVent conecta pessoas,
+                        eventos e experiências em um
+                        só lugar, tornando cada encontro
+                        mais simples, moderno e especial.
+                    </p>
+
+                </div>
+
+                <!-- BENEFÍCIOS -->
+
+                <div class="beneficios">
+
+                    <div class="beneficio">
+                        <span></span>
+                        <p>Descubra eventos</p>
+                    </div>
+
+                    <div class="beneficio">
+                        <span></span>
+                        <p>Faça conexões</p>
+                    </div>
+
+                    <div class="beneficio">
+                        <span></span>
+                        <p>Viva experiências</p>
+                    </div>
+
+                </div>
+
+                <!-- MENSAGEM FINAL -->
+
+                <div class="mensagem-final">
+
+                    Sua próxima experiência começa aqui.
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

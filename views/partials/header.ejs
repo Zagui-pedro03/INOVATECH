@@ -1,0 +1,504 @@
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    width: 100%;
+    min-height: 90px;
+
+    background-color: #300066;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 35px;
+
+    border-bottom: 1px solid #e5e5e5;
+
+    font-family: "Reddit Sans", sans-serif;
+
+    position: relative;
+    z-index: 100;
+}
+
+/* =========================
+   LOGO
+========================= */
+
+#logo {
+    display: flex;
+    align-items: center;
+
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+}
+
+#logo img {
+    display: block;
+    width: 230px;
+    max-width: 100%;
+    height: auto;
+}
+
+/* =========================
+   NAVEGAÇÃO CENTRALIZADA
+========================= */
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 35px;
+
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.nav a {
+    position: relative;
+
+    text-decoration: none;
+    color: #f7f7f7;
+
+    font-size: 16px;
+    font-weight: 500;
+
+    white-space: nowrap;
+
+    transition: 0.2s;
+}
+
+.nav a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 3px white;
+}
+
+/* Linha abaixo dos links */
+
+.nav a::after {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+
+    width: 0;
+    height: 2px;
+
+    background-color: #5900ff;
+
+    transition: width 0.2s;
+}
+
+.nav a:hover::after {
+    width: 100%;
+}
+
+/* =========================
+   MENU DO USUÁRIO
+========================= */
+
+.usuario-menu {
+    position: relative;
+
+    width: 280px;
+    flex-shrink: 0;
+
+    z-index: 10;
+}
+
+.inicio {
+    display: flex;
+    align-items: center;
+
+    background-color: #360079;
+
+    width: 100%;
+    min-height: 60px;
+
+    padding: 5px;
+
+    border-radius: 5px;
+
+    position: relative;
+    z-index: 2;
+
+    cursor: pointer;
+}
+
+/* =========================
+   ÍCONE DO USUÁRIO
+========================= */
+
+.usuario {
+    height: 50px;
+    width: 50px;
+
+    flex-shrink: 0;
+
+    background-color: #190038;
+    border: 1px solid rgb(98, 0, 255);
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+    font-size: 22px;
+
+    margin-right: 12px;
+}
+
+/* =========================
+   DADOS DO USUÁRIO
+========================= */
+
+.dados {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    gap: 5px;
+    min-width: 0;
+    overflow: hidden;
+}
+
+#nome {
+    color: white;
+    font-size: 16px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#email {
+    color: rgb(185, 185, 185);
+    font-size: 11px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* =========================
+   SETA DO MENU
+========================= */
+
+.inicio > img {
+    position: absolute;
+
+    right: 10px;
+    top: 50%;
+
+    transform: translateY(-50%);
+    transition: transform 0.3s;
+}
+
+.usuario-menu:hover .inicio > img {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+/* =========================
+   MENU SUSPENSO
+========================= */
+
+#sair {
+    position: absolute;
+
+    top: 100%;
+    left: 0;
+
+    width: 100%;
+
+    padding: 8px 5px;
+
+    background-color: #22004b;
+
+    border-radius: 0 0 5px 5px;
+    list-style: none;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(-10px);
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease,
+        visibility 0.3s;
+
+    z-index: 101;
+}
+
+.usuario-menu:hover #sair,
+.usuario-menu:focus-within #sair {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+#sair li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    list-style: none;
+
+    padding: 10px;
+
+    cursor: pointer;
+    border-radius: 4px;
+
+    transition: background-color 0.3s;
+}
+
+#sair li:hover {
+    background-color: #3a086a;
+}
+
+#sair #logout {
+    color: #fd4a4a;
+}
+
+#sair #perfil {
+    color: white;
+}
+
+#sair img {
+    position: relative;
+    flex-shrink: 0;
+}
+
+/* =========================
+   TABLETS
+========================= */
+
+@media (max-width: 1100px) {
+    .header {
+        padding: 0 20px;
+    }
+
+    #logo img {
+        width: 180px;
+    }
+
+    .usuario-menu {
+        width: 220px;
+    }
+
+    .nav {
+        gap: 20px;
+    }
+
+    .nav a {
+        font-size: 14px;
+    }
+
+    .usuario {
+        width: 42px;
+        height: 42px;
+        margin-right: 8px;
+    }
+
+    #nome {
+        font-size: 14px;
+    }
+
+    #email {
+        font-size: 10px;
+    }
+}
+
+/* =========================
+   TELAS MENORES
+========================= */
+
+@media (max-width: 800px) {
+    .header {
+        min-height: auto;
+
+        padding: 15px 20px;
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        row-gap: 20px;
+    }
+
+    #logo img {
+        width: 170px;
+    }
+
+    .usuario-menu {
+        width: 200px;
+    }
+
+    /* A navegação passa para uma linha própria */
+
+    .nav {
+        position: static;
+        transform: none;
+
+        order: 3;
+
+        width: 100%;
+
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        gap: 20px;
+
+        padding: 5px 0;
+    }
+
+    .nav a {
+        font-size: 14px;
+    }
+}
+
+/* =========================
+   CELULARES
+========================= */
+
+@media (max-width: 500px) {
+    .header {
+        padding: 12px;
+        row-gap: 15px;
+    }
+
+    #logo img {
+        width: 125px;
+    }
+
+    .usuario-menu {
+        width: auto;
+        max-width: 190px;
+    }
+
+    .inicio {
+        min-height: 45px;
+        padding: 4px;
+    }
+
+    .usuario {
+        width: 35px;
+        height: 35px;
+
+        font-size: 16px;
+        margin-right: 7px;
+    }
+
+    .dados {
+        max-width: 105px;
+        gap: 3px;
+    }
+
+    #nome {
+        font-size: 12px;
+    }
+
+    #email {
+        font-size: 9px;
+        margin-left: 0;
+    }
+
+    .inicio > img {
+        width: 10px;
+        height: auto;
+        right: 5px;
+    }
+
+    .nav {
+        gap: 12px 18px;
+    }
+
+    .nav a {
+        font-size: 13px;
+    }
+
+    .nav a::after {
+        bottom: -5px;
+    }
+}
+
+/* =========================
+   CELULARES MUITO ESTREITOS
+========================= */
+
+@media (max-width: 360px) {
+    #logo img {
+        width: 105px;
+    }
+
+    .usuario-menu {
+        max-width: 165px;
+    }
+
+    .dados {
+        max-width: 85px;
+    }
+
+    .nav {
+        gap: 12px;
+    }
+
+    .nav a {
+        font-size: 12px;
+    }
+}
+</style>
+
+<header class="header">
+  <!-- MENU DO USUÁRIO -->
+    <a href="/home" id="logo"><img src="/assets/img/logo.png" width="270" alt="logo" ></a>
+
+  <!-- NAVEGAÇÃO -->
+  <nav class="nav">
+    <a href="/home"> Home </a>
+
+    <a href="/eventos"> Eventos </a>
+
+    <a href="/salas"> Salas </a>
+
+    <a href="/usuarios"> Usuários </a>
+  </nav>
+
+  <!-- PERFIL -->
+   <div class="usuario-menu">
+    <div class="inicio">
+      <div class="usuario">
+        <p id="primeira-letra"></p>
+      </div>
+
+      <div class="dados">
+        <p id="nome"></p>
+        <p id="email"></p>
+      </div>
+
+      <img src="/assets/img/down-arrow.png" height="15" alt="" />
+    </div>
+
+    <!-- MENU QUE APARECE NO HOVER -->
+    <ul id="sair">
+      <li id="logout"><img src="/assets/img/logout.png" height="15" alt=""> Sair</li>
+      <li id="perfil"><img src="/assets/img/perfil.png" height="20" alt=""> Perfil</li>
+    </ul>
+  </div>
+  
+</header>
+
+
+<!--
+  TERMINAR PERFIL
+-->

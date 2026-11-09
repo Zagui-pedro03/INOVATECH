@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Eventos</title>
+
+    <link rel="icon" type="image/png" href="/assets/img/favicon/icone_2.png">
+    <link rel="stylesheet" href="/css/VisualizarEventosCriados.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Reddit+Sans:ital,wght@0,200..900;1,200..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet"
+    >
+</head>
+
+<body>
+
+    <%- include("../partials/header") %>
+
+    <main class="eventos-container">
+        <p id="i" style="display: none;"><%= i %></p>
+
+        <div id="titulo">
+            <h2 id="nomeEvento"></h2>
+            <p id="txtNome" style="display: none;"></p><br>
+            <h4 id="temaEvento"></h4>
+            <p id="txtTema" style="display: none;"></p>
+        </div>
+
+        <div id="detalhes">
+            <p id="descricao"></p>
+            <p id="txtDescricao" style="display: none;"></p>
+
+            <p id="limitePessoas"></p>
+            <p id="txtVagas" style="display: none;"></p>
+        </div>
+
+        <div id="info-container">
+            <div id="info">
+                <h3>Data</h3>
+                <h3>Local</h3>
+
+                <p id="data"></p>
+                
+
+                <p id="local"></p>
+               
+
+                <p id="txtData" style="display: none;"></p>
+                 <p id="txtLocal" style="display: none;"></p>
+                <h3>Horário de início</h3>
+                <h3>Horário de término</h3>
+
+                <p id="horarioInicio"></p>
+
+                <p id="horariotermino"></p>
+                
+
+                <p id="txtHorarioInicio" style="display: none;"></p>
+                <p id="txtHorarioTermino" style="display: none;"></p>
+            </div>
+        </div>
+
+        <div id="adicional">
+            <h3>Criador:</h3>
+            <h3 id="criador"></h3>
+        </div>
+
+        <br>
+
+        <h3>Inscritos</h3>
+        <div id="divConvidar"></div>
+        <div id="inscritos"></div>
+
+        <button id="atualizabtn">Salvar dados</button>
+
+        <div class="acoes">
+            <div id="editar" onclick="editar()">
+                <img src="/assets/img/editar_icone.png" width="30" alt="">
+            </div>
+
+            <div id="deletar" onclick="deletar()">
+                <img src="/assets/img/delete_icone.png" width="30" alt="">
+            </div>
+        </div>
+
+    </main>
+
+ <%- include("../partials/footer") %>
+ 
+    <script type="module" src="/js/visualizar-evento-criado.js"></script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Home</title>
+
+    <link rel="icon" type="image/png" href="/assets/img/favicon/icone_2.png">
+    <link rel="stylesheet" href="/css/homeSalas.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Reddit+Sans:ital,wght@0,200..900;1,200..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet"
+    >
+</head>
+<body>
+     <%- include("../partials/header") %>
+        <div class="divPesquisar">
+            <form class="input-pesquisa">
+            <input type="text" id="txtPesquisa">
+            <button id="enviarPesquisa" class="img-pesquisa"><img id="img" src="/assets/img/pesquisa_icone.png" width="15" height="15" alt=""></button>
+        </form>
+        </div>
+        <div id="semEventos" class="sem-eventos" style="display: none;">
+
+    <div class="icone-sem-eventos">
+        <span><img src="/assets/img/chat_icone.png" width="50" height="50"></span>
+    </div>
+
+    <h2>Nenhuma sala atualmente</h2>
+
+    <p>
+        Ainda não há salas disponíveis.<br>
+        Que tal criar a primeira e reunir a comunidade?
+    </p>
+
+    <a href="/salas/criar-sala" class="btn-criar-evento">
+        + Criar Sala
+    </a>
+
+</div>
+    <div id="salas-container">
+        </div>
+
+   
+    <div class="opcoes criacao" id="criacao">
+        <a href="/salas/criar-sala" id="criar">Criar sala</a>
+        <img src="/assets/img/add_icone.png" width="30" alt="">
+    </div>
+    <div class="opcoes mensagem" id="mensagem">
+        <a href="/salas/solicitacoes" id="solicitacao">Solicitações</a>
+        <img src="/assets/img/mensagem.png" width="30" alt="">
+    </div>
+    <script type="module" src="/js/homeSalas.js"></script>
+
+ <%- include("../partials/footer") %>
+    <script>
+
+        let optionCreate = document.getElementById("criacao")
+
+        let optionMessage = document.getElementById("mensagem")
+
+        optionCreate.addEventListener("click", () => {
+            window.location.href = "/eventos/criar-evento"
+        })
+
+        optionMessage.addEventListener("click", () => {
+            window.location.href = "/eventos/solicitacoes"
+        })
+    </script>
+</body>
+</html>
+

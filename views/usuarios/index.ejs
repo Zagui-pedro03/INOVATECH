@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Usuários | GatherVent</title>
+
+    <!-- CSS da página -->
+    <link rel="stylesheet" href="/css/usuarios.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Reddit+Sans:ital,wght@0,200..900;1,200..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet"
+    >
+</head>
+
+<body>
+
+ <%- include("../partials/header") %>
+
+    <main class="pagina-usuarios">
+
+    <div class="pesquisarEvento">
+        <form class="input-pesquisa">
+        <input type="text" id="txtPesquisa" placeholder="Pesquise aqui">
+        <button id="enviarPesquisa" class="img-pesquisa"><img src="/assets/img/pesquisa_icone.png" width="15" height="15" alt=""></button>
+        </form>
+   </div>
+
+        <!-- O JavaScript vai colocar os cards aqui -->
+        <div class="usuarios-container">
+            <p>Carregando usuários...</p>
+        </div>
+
+    </main>
+
+    <!-- JavaScript da página -->
+    <script type="module" src="/js/usuarios.js"></script>
+
+<%- include("../partials/footer") %>
+
+</body>
+
+
+
+</html>
+
+
+

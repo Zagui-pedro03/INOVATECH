@@ -1,0 +1,178 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Reddit Sans", sans-serif;
+  background-color: #e3e3e3;
+}
+
+.pagina-usuarios {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.pagina-usuarios h1 {
+  color: #2e0066;
+  margin-bottom: 25px;
+}
+
+.pesquisarEvento {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+
+.input-pesquisa {
+    display: flex;
+    gap: 2px;
+    background-color: rgb(181, 181, 181);
+    padding: 1px;
+    border-radius: 3px;
+}
+
+.input-pesquisa input {
+    border: none;
+    width: 270px;
+    padding: 7px;
+    border-radius: 3px;
+    font-size: 15px;
+    font-family: "Reddit Sans", sans-serif;
+    outline: none;
+}
+
+.input-pesquisa input::placeholder {
+    font-family: "Reddit Sans", sans-serif;
+}
+
+.img-pesquisa {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(37, 0, 97);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in;
+    border: none;
+}
+
+.img-pesquisa:hover {
+    background-color: rgb(54, 0, 140);
+    transition: background-color 0.3s ease-in;
+}
+
+
+.usuarios-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 50vh;
+}
+
+.usuario-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  padding: 20px 25px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.usuario-avatar {
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  background-color: #2e0066;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.usuario-qualidades {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-top: 15px;
+}
+
+
+.qualidade {
+
+    background-color: #F0E8FF;
+
+    color: #2B0068;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+}
+
+.usuario-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.usuario-nome {
+  color: #2e0066;
+  font-size: 18px;
+  margin-bottom: 5px;
+  overflow-wrap: anywhere;
+}
+
+.usuario-email {
+  color: #666;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.btn-visualizar {
+  flex-shrink: 0;
+  padding: 12px 18px;
+
+  background-color: #2e0066;
+  color: white;
+  border-radius: 6px;
+
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.btn-visualizar:hover {
+  background-color: #5100a6;
+}
+
+@media (max-width: 480px) {
+  .usuario-card {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 18px;
+  }
+
+  .btn-visualizar {
+    width: 100%;
+    text-align: center;
+  }
+}

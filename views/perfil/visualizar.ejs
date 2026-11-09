@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Visualizar perfil</title>
+
+    <link rel="icon" type="image/png" href="/assets/img/favicon/icone_2.png">
+
+    <link rel="stylesheet" href="/css/visualizar-perfil.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Reddit+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+</head>
+
+<body>
+
+    <%- include("../partials/header") %>
+
+    <!-- UID DO USUÁRIO SELECIONADO -->
+
+    <input type="hidden" id="uid" value="<%= uid %>">
+
+
+    <div class="content">
+
+        <div class="perfil-body">
+
+            <p id="mensagemPerfil">Carregando perfil...</p>
+
+            <div id="conteudoPerfil" hidden>
+
+
+                <!-- =========================
+                     CABEÇALHO DO PERFIL
+                ========================== -->
+
+                <div class="perfil-header">
+
+                    <div class="dados">
+
+                        <h2 id="nomeText"></h2>
+
+                        <p id="emailText"></p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     RECADO
+                ========================== -->
+
+                <div class="msg">
+
+                    <h4>Recado</h4>
+
+                    <p id="recado"></p>
+
+                </div>
+
+
+                <!-- =========================
+                     EVENTOS - CONTADORES
+                ========================== -->
+
+                <div class="eventos contadores">
+
+                    <div class="section criados">
+
+                        <h3>Eventos criados</h3>
+
+                        <p id="n_eventosCriados">0</p>
+
+                    </div>
+
+
+                    <div class="section inscritos">
+
+                        <h3>Eventos inscritos</h3>
+
+                        <p id="n_eventosInscritos">0</p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     LISTAGEM DOS EVENTOS
+                ========================== -->
+
+                <div class="eventos listagens">
+
+                    <div id="eventosCriados">
+
+                        <!-- Eventos criados pelo usuário -->
+
+                    </div>
+
+
+                    <div id="eventosInscritos">
+
+                        <!-- Eventos inscritos pelo usuário -->
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     SALAS - CONTADORES
+                ========================== -->
+
+                <div class="salas contadores">
+
+                    <div class="section criados">
+
+                        <h3>Salas criadas</h3>
+
+                        <p id="n_salasCriadas">0</p>
+
+                    </div>
+
+
+                    <div class="section inscritas">
+
+                        <h3>Salas inscritas</h3>
+
+                        <p id="n_salasInscritas">0</p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     LISTAGEM DAS SALAS
+                ========================== -->
+
+                <div class="salas listagens">
+
+                    <div id="salasCriadas">
+
+                        <!-- Salas criadas pelo usuário -->
+
+                    </div>
+
+
+                    <div id="salasInscritas">
+
+                        <!-- Salas inscritas pelo usuário -->
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     INFORMAÇÕES ADICIONAIS
+                ========================== -->
+
+                <div class="info">
+
+                    <h3>Informações adicionais</h3>
+
+                    <p id="info"></p>
+
+                </div>
+
+
+                <!-- =========================
+                     QUALIDADES
+                ========================== -->
+
+                <div class="categorias">
+
+                    <h4>Qualidades do usuário</h4>
+
+                    <div
+                        class="listar-qualidade"
+                        id="listar-qualidade"
+                    >
+
+                        <!-- Qualidades serão inseridas pelo JavaScript -->
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <%- include("../partials/footer") %>
+
+
+    <script
+        type="module"
+        src="/js/visualizar-perfil.js"
+    ></script>
+
+</body>
+
+</html>

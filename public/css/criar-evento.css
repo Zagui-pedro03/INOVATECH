@@ -1,0 +1,265 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Reddit Sans", sans-serif;
+    background-color: #E2E2E2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 100vh;
+    padding: 30px 15px;
+}
+.linkVoltar a {
+    text-decoration: none;
+    color: #2B0068;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.linkVoltar {
+    position: absolute;
+    top: 15px;
+    left: 25px;
+}
+
+.linkVoltar .linha {
+    width: 0;
+    height: 2px;
+    background-color: #4b1191;
+    transition: width 0.2s ease;
+}
+
+.linkVoltar:hover .linha {
+    width: 60px;
+}
+
+form {
+    width: 100%;
+    max-width: 800px;
+
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+
+    padding: 40px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+    border-radius: 5px;
+}
+
+h1 {
+    margin-bottom: 35px;
+    font-weight: 500;
+    color: #2B014B;
+}
+
+.linha-campos {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 25px;
+}
+
+.campo {
+    flex: 1;
+    min-width: 0;
+    padding: 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.campo:hover {
+    background-color: #e9e8e89c;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+
+    font-size: 17px;
+    color: #2B0068;
+    font-weight: 500;
+}
+
+.linha {
+    height: 2px;
+    width: 0;
+    background-color: rgb(154, 98, 206);
+    transition: width 0.3s;
+}
+
+.campo:hover .linha {
+    width: 100%;
+}
+
+input,
+select {
+    display: block;
+    width: 100%;
+    height: 42px;
+
+    margin-top: 10px;
+    padding: 0 12px;
+
+    border: 1px solid transparent;
+    border-radius: 3px;
+
+    background-color: #fff;
+    color: rgb(27, 27, 27);
+
+    font-family: "Reddit Sans", sans-serif;
+    font-size: 15px;
+
+    transition: border 0.2s;
+}
+
+input::placeholder {
+    color: #adadad;
+    font-family: "Reddit Sans", sans-serif;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 1px solid rgba(56, 1, 88, 0.589);
+}
+
+select {
+    cursor: pointer;
+}
+
+#containerVagas {
+    margin-top: 20px;
+}
+
+#containerVagas[hidden] {
+    display: none;
+}
+
+#containerVagas label {
+    font-size: 15px;
+    margin-top: 15px;
+}
+
+.descricao {
+    width: 100%;
+    margin-top: 15px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.descricao-title {
+    margin-bottom: 10px;
+    color: #2B014B;
+    font-weight: 500;
+}
+
+.descricao-title h2 {
+    font-size: 21px;
+    font-weight: 500;
+}
+
+form textarea {
+    width: 100%;
+    min-height: 160px;
+
+    padding: 12px;
+    margin-bottom: 20px;
+
+    border: 1px solid transparent;
+    border-radius: 3px;
+
+    background-color: #fff;
+    color: rgb(27, 27, 27);
+
+    font-family: "Reddit Sans", sans-serif;
+    font-size: 15px;
+    resize: vertical;
+}
+
+form textarea::placeholder {
+    color: #adadad;
+    font-family: "Reddit Sans", sans-serif;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    width: 250px;
+    padding: 12px;
+
+    margin-top: 20px;
+
+    color: white;
+    background-color: #340272;
+
+    border: none;
+    border-radius: 5px;
+
+    font-family: "Reddit Sans", sans-serif;
+    font-size: 19px;
+
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #4b1191;
+    transform: translateY(-2px);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.errado {
+    border: 2px solid rgb(255, 129, 129) !important;
+}
+
+.erro{
+    color: rgb(255, 129, 129) ;
+}
+
+.certo{
+    color: rgb(25, 157, 25) ;
+}
+
+.correto {
+    border: 2px solid rgb(79, 239, 79) !important;
+}
+
+@media (max-width: 600px) {
+    form {
+        padding: 25px 15px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    .linha-campos {
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .campo {
+        width: 100%;
+        padding: 10px;
+    }
+
+    button {
+        width: 100%;
+    }
+}

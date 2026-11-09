@@ -1,0 +1,76 @@
+.pesquisarEvento{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+.input-pesquisa{
+    display: flex;
+    gap: 2px;
+    background-color: rgb(181, 181, 181);
+    padding: 1px;
+    border-radius: 3px;
+}
+.input-pesquisa input{
+    border: none;
+    width: 270px;
+    padding: 7px;
+    border-radius: 3px;
+    font-size: 15px;
+    font-family: "Reddit Sans", sans-serif;
+    outline: none;
+}
+.input-pesquisa input::placeholder{
+    font-family: "Reddit Sans", sans-serif;
+}
+
+.img-pesquisa{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(37, 0, 97);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in;
+}
+.img-pesquisa:hover{
+    background-color: rgb(54, 0, 140) ;
+    transition: background-color 0.3s ease-in;
+}
+
+#btnVisualizar{
+    border: #2B0068 2px solid;
+
+    background-color: transparent;
+
+     border-radius: 6px;
+
+    padding: 9px 23px;
+
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    font-family: "Reddit Sans", sans-serif;
+
+    color: #2B0068;
+
+    position: absolute;
+    left: 180px;
+
+    transition: 0.2s ease;
+}
+
+#btnVisualizar:hover{
+    transform: translateY(-1px);
+    border-color: #6B20C5;
+    transition: 0.2s ease;
+}
+
+#btnVisualizar a{
+    text-decoration: none;
+}

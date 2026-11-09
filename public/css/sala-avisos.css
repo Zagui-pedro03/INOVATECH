@@ -1,0 +1,388 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --fundo: #f7f5fb;
+    --roxo: #6d28d9;
+    --roxo-escuro: #4c1d95;
+    --roxo-claro: #ede9fe;
+    --texto: #27213a;
+    --texto-suave: #827a94;
+    --borda: #e9e3f1;
+    --branco: #ffffff;
+}
+
+body {
+    font-family: "Reddit Sans", sans-serif;
+    background: var(--fundo);
+    color: var(--texto);
+    min-height: 100vh;
+}
+
+.container {
+    display: grid;
+
+    grid-template-areas:
+        "area-superior area-superior"
+        "area-lateral area-mensagens";
+
+    grid-template-columns: 250px minmax(0, 1fr);
+    grid-template-rows: 90px minmax(0, 1fr);
+
+    gap: 16px;
+    min-height: 100vh;
+    padding: 16px;
+}
+
+/* CABEÇALHO */
+
+.area-superior {
+    grid-area: area-superior;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4px;
+
+    padding: 18px 28px;
+
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-left: 5px solid var(--roxo);
+    border-radius: 18px;
+
+    box-shadow: 0 4px 18px rgba(48, 24, 80, 0.04);
+}
+.area-superior .img{
+    width: 45px;
+    height: 45px;
+    background-color: #ff65652d;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+.area-superior .img:hover{
+    background-color: #ff3c3c5d ;
+    transition: background 0.2s ease;
+}
+
+#nomeSala {
+    color: var(--roxo-escuro);
+    font-size: 1.5rem;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+}
+
+#categoriaSala {
+    color: var(--texto-suave);
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+/* MENU LATERAL */
+
+.area-lateral {
+    grid-area: area-lateral;
+
+    min-width: 0;
+    padding: 22px 14px;
+
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 18px;
+
+    box-shadow: 0 4px 18px rgba(48, 24, 80, 0.04);
+}
+
+#canais {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    list-style: none;
+}
+
+#canais li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 12px 14px;
+
+    text-decoration: none;
+    color: var(--texto-suave);
+
+    font-size: 0.95rem;
+    font-weight: 600;
+
+    border-radius: 10px;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+/* CANAL SELECIONADO */
+#canais li#avisos a,
+#canais li a.ativo {
+    background-color: #ede9fe !important;
+    color: #4c1d95 !important;
+}
+/* EFEITO AO PASSAR O MOUSE */
+#canais li a:hover {
+    background: var(--roxo-claro);
+    color: var(--roxo-escuro);
+}
+
+
+/* ÁREA DE MENSAGENS */
+
+.area-mensagens {
+    grid-area: area-mensagens;
+
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+    min-height: 0;
+
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow: 0 4px 18px rgba(48, 24, 80, 0.04);
+}
+
+/* VISOR DAS MENSAGENS */
+
+
+.visor-mensagens {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 15px;
+
+    min-height: 0;
+    max-height: 600px;
+    padding: 24px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    background:
+        radial-gradient(
+            circle at 10px 12px,
+            #bababa 1px,
+            transparent 0
+        );
+
+    background-color: #f7edfc;
+    background-size: 20px 20px;
+    border: 1px rgba(31, 0, 48, 0.355) solid;
+
+    /* Rolagem suave */
+    scroll-behavior: smooth;
+
+    /* Scrollbar Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #8b5cb5 #f7edfc;
+}
+
+/* LARGURA DA BARRA */
+.visor-mensagens::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* FUNDO DA BARRA */
+.visor-mensagens::-webkit-scrollbar-track {
+    background: #f7edfc;
+    border-radius: 10px;
+}
+
+/* PARTE QUE SE MOVIMENTA */
+.visor-mensagens::-webkit-scrollbar-thumb {
+    background: #8b5cb5;
+    border-radius: 10px;
+    border: 2px solid #f7edfc;
+}
+
+/* QUANDO PASSAR O MOUSE */
+.visor-mensagens::-webkit-scrollbar-thumb:hover {
+    background: #4b0082;
+}
+
+/* ÁREA DE ESCREVER MENSAGEM */
+
+#escrever-mensagem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 14px 20px;
+
+    background: var(--branco);
+    border-top: 1px solid var(--borda);
+}
+#escrever-mensagem form{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+#msg{
+    width: 93%;
+    min-height: 36px;
+    max-height: 45px;
+    border: 1px rgba(27, 1, 50, 0.198) solid;
+    border-radius: 5px;
+    box-shadow: 0px 0px 6px rgba(25, 0, 50, 0.157);
+    padding: 5px;
+    transition: 
+    border 0.2s,
+    box-shadow 0.2s
+    ;
+    resize: none;
+    font-family: "Reddit Sans", sans-serif;
+    font-size: 17px;
+}
+#msg::placeholder{
+    font-family: "Reddit Sans", sans-serif;
+    color: #827a94;
+}
+#msg:hover{
+    border: 1px rgba(48, 1, 89, 0.692) solid;
+    box-shadow: 0px 0px 5px rgba(31, 0, 62, 0.585);
+    background-color: #bdb3d631;
+    transition: 
+    border 0.2s,
+    box-shadow 0.2s
+    ;
+}
+#msg:focus{
+    border: 1px rgba(78, 1, 145, 0.692) solid;
+    box-shadow: 0px 0px 10px rgba(118, 43, 193, 0.585);
+    background-color: #bdb3d631;
+    transition: 
+    border 0.2s,
+    box-shadow 0.2s
+    ;
+    outline: none;
+}
+#enviarMsg{
+    border: none;
+    background-color: #1c0438;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 45px;
+    border-radius: 5px;
+    width: 45px;
+    box-shadow: 0px 0px 5px rgba(28, 0, 50, 0.601);
+    cursor: pointer;
+    transition: background 0.2s
+    ;
+    
+}
+#enviarMsg:hover{
+    background-color: #360665;
+     transition: background 0.2s
+    ;
+}
+
+/* LISTA DE AVISOS */
+
+
+
+.card-aviso {
+    background: #fff;
+    border-left: 4px solid #4b0082;
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    width: 40vw;
+    margin-bottom: 35px;
+}
+
+.texto-aviso {
+    font-size: 15px;
+    color: #333;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
+
+.info-aviso {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+.data-aviso,
+.hora-aviso {
+    font-size: 12px;
+    color: #666;
+}
+
+.hora-aviso {
+    color: #4b0082;
+    font-weight: 600;
+}
+
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 700px) {
+    .container {
+        grid-template-areas:
+            "area-superior"
+            "area-lateral"
+            "area-mensagens";
+
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto auto minmax(400px, 1fr);
+
+        gap: 12px;
+        padding: 10px;
+    }
+
+    .area-superior {
+        min-height: 80px;
+        padding: 16px 20px;
+    }
+
+    .area-lateral {
+        padding: 12px;
+    }
+
+    #canais {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    #canais li a {
+        padding: 10px 14px;
+    }
+
+    .area-mensagens {
+        min-height: 400px;
+    }
+
+    .visor-mensagens {
+        padding: 16px;
+    }
+}

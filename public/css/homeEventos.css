@@ -1,0 +1,577 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #E2E2E2;
+    font-family: "Reddit Sans", sans-serif;
+    min-height: 100vh;
+    position: relative;
+}
+
+.pesquisarEvento {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+
+.input-pesquisa {
+    display: flex;
+    gap: 2px;
+    background-color: rgb(181, 181, 181);
+    padding: 1px;
+    border-radius: 3px;
+}
+
+.input-pesquisa input {
+    border: none;
+    width: 270px;
+    padding: 7px;
+    border-radius: 3px;
+    font-size: 15px;
+    font-family: "Reddit Sans", sans-serif;
+    outline: none;
+}
+
+.input-pesquisa input::placeholder {
+    font-family: "Reddit Sans", sans-serif;
+}
+
+.img-pesquisa {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(37, 0, 97);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in;
+    border: none;
+}
+
+.img-pesquisa:hover {
+    background-color: rgb(54, 0, 140);
+    transition: background-color 0.3s ease-in;
+}
+
+/* =========================
+   CONTAINER DOS EVENTOS
+========================= */
+
+.eventos-container {
+    width: 90%;
+    min-height: 60vh;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.evento {
+    width: 100%;
+    background-color: #FFFFFF;
+    padding: 25px 30px;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+
+    transition:
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+}
+
+/* Hover normal */
+
+.evento:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* =========================
+   CARD EXPANDIDO
+========================= */
+
+.evento.expandido {
+    z-index: 100;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+.evento-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+/* Título */
+
+.evento-titulo {
+    font-size: 23px;
+    font-weight: 700;
+    color: #2B0068;
+}
+
+/* Quantidade de pessoas */
+
+.evento-pessoas {
+    color: #666666;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+/* =========================
+   AÇÕES
+========================= */
+
+.evento-acoes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+/* =========================
+   BOTÃO INSCREVER
+========================= */
+
+.btn-inscrever {
+    background-color: #2B0068;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 11px 25px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.btn-inscrever:hover {
+    background-color: #4600A8;
+    transform: translateY(-1px);
+}
+
+/* =========================
+   BOTÃO VER MAIS
+========================= */
+
+.btn-expandir {
+    background: transparent;
+    border: none;
+    color: #2B0068;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s ease;
+}
+
+.btn-expandir:hover {
+    color: #6B20C5;
+}
+
+/* =========================
+   SETA
+========================= */
+
+.seta {
+    font-size: 20px;
+    line-height: 10px;
+    transition: transform 0.3s ease;
+}
+
+/* Gira a seta quando expandido */
+
+.evento.expandido .btn-expandir .seta {
+    transform: rotate(180deg);
+}
+
+/* =========================
+   ÁREA EXPANDIDA
+========================= */
+
+.evento-descricao {
+    position: absolute;
+    top: calc(100% - 10px);
+    left: 0;
+    width: 100%;
+    background-color: #FFFFFF;
+    border-radius: 0 0 10px 10px;
+    border-top: 1px solid #EAEAEA;
+    padding: 35px 30px 25px;
+    color: #555555;
+    line-height: 1.7;
+    overflow-wrap: break-word;
+    z-index: -1;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(-20px);
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.35s ease,
+        visibility 0.35s ease;
+}
+
+/* =========================
+   ÁREA EXPANDIDA ABERTA
+========================= */
+
+.evento.expandido .evento-descricao {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* =========================
+   TÍTULO DA DESCRIÇÃO
+========================= */
+
+.evento-descricao h3 {
+    color: #2B0068;
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+/* =========================
+   INFORMAÇÕES
+========================= */
+
+.evento-descricao p {
+    margin-bottom: 12px;
+    font-size: 15px;
+}
+
+/* =========================
+   BOTÃO RECOLHER
+========================= */
+
+.btn-recolher {
+    margin-top: 15px;
+    background: transparent;
+    border: none;
+    color: #2B0068;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s ease;
+}
+
+.btn-recolher:hover {
+    color: #6B20C5;
+}
+
+/* =========================
+   OPÇÕES FLUTUANTES
+========================= */
+
+.pesquisa {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #2B0068;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.criacao {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #2B0068;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.opcoes {
+    position: fixed;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #2B0068;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    cursor: pointer;
+    z-index: 100;
+    transition: background-color 0.2s ease;
+}
+
+/* =========================
+   PESQUISA
+========================= */
+
+.pesquisa:hover {
+    background-color: #3e0194;
+}
+
+#pesquisar {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 101;
+    text-decoration: none;
+    font-size: 15px;
+    color: white;
+    font-family: "Reddit Sans", sans-serif;
+    background-color: #3e0194;
+    width: 130px;
+    padding: 7px;
+    border-radius: 5px;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(0);
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.3s ease,
+        visibility 0.3s ease;
+}
+
+.pesquisa:hover #pesquisar {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-70px);
+}
+
+/* =========================
+   CRIAÇÃO
+========================= */
+
+#criar {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 101;
+    text-decoration: none;
+    font-size: 15px;
+    color: white;
+    font-family: "Reddit Sans", sans-serif;
+    background-color: #3e0194;
+    width: 130px;
+    padding: 7px;
+    border-radius: 5px;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(0);
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.3s ease,
+        visibility 0.3s ease;
+}
+
+.criacao:hover #criar {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-70px);
+}
+
+.criacao:hover {
+    background-color: #3e0194;
+}
+
+/* =========================
+   MENSAGENS
+========================= */
+
+.mensagem {
+    position: fixed;
+    bottom: 180px;
+    right: 20px;
+
+    width: 50px;
+    height: 50px;
+
+    background-color: #2B0068;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 100px;
+    cursor: pointer;
+
+    z-index: 100;
+
+    transition: background-color 0.2s ease;
+}
+
+/* Link de solicitações */
+
+#solicitacao {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 101;
+
+    text-decoration: none;
+    font-size: 15px;
+    color: white;
+    font-family: "Reddit Sans", sans-serif;
+
+    background-color: #3e0194;
+
+    width: 130px;
+    padding: 7px;
+
+    border-radius: 5px;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateX(0);
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.3s ease,
+        visibility 0.3s ease;
+}
+
+/* Exibir solicitações ao passar o mouse */
+
+.mensagem:hover #solicitacao {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-70px);
+}
+
+/* Hover do botão */
+
+.mensagem:hover {
+    background-color: #3e0194;
+}
+
+/* =========================
+   SEM EVENTOS
+========================= */
+
+.sem-eventos {
+    width: 90%;
+    max-width: 750px;
+    margin: 40px auto;
+    padding: 55px 30px;
+    background: white;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+.icone-sem-eventos {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 25px;
+    background: #f2eafa;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sem-eventos h2 {
+    color: #310066;
+    margin-bottom: 12px;
+}
+
+.sem-eventos p {
+    color: #777;
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.btn-criar-evento {
+    display: inline-block;
+    padding: 13px 25px;
+    background: #310066;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-criar-evento:hover {
+    background: #5100a0;
+    transform: translateY(-2px);
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 600px) {
+
+    .eventos-container {
+        width: 94%;
+        margin-top: 25px;
+    }
+
+    .evento {
+        padding: 20px;
+    }
+
+    .evento-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .evento-titulo {
+        font-size: 20px;
+    }
+
+    .evento-acoes {
+        flex-wrap: wrap;
+    }
+
+    .evento-descricao {
+        padding: 30px 20px 20px;
+    }
+}

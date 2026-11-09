@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Home</title>
+
+    <link rel="icon" type="image/png" href="/assets/img/favicon/icone_2.png">
+    <link rel="stylesheet" href="/css/criar-sala.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Reddit+Sans:ital,wght@0,200..900;1,200..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet"
+    >
+</head>
+
+<body>
+    <div class="linkVoltar">
+    <a href="/salas">Voltar</a>
+    <div class="linha"></div>
+    </div>
+    <form method="post" id="formulario">
+        <h1>Criar sala</h1>
+        <!-- CAMPO NOME -->
+        <div class="campo">
+        <label for="nome">Nome da sala:</label>
+        <div class="linha"></div>
+        <input type="text" id="nome" placeholder="Digite um nome para sua sala">
+        <p id="txtNome"></p>
+        </div>
+
+        <!-- CAMPO CATEGORIA -->
+        <div class="campo">
+        <label for="categoria">Categoria</label>
+        <div class="linha"></div>
+        <select name="categoria" id="categoria">
+            <option value="nada" selected>Escolha uma categoria</option>
+            <option value="Estudos e Educação">Estudos e Educação</option>
+            <option value="Jogos e Entretenimento">Jogos e Entretenimento</option>
+            <option value="Arte e Criatividade">Arte e Criatividade</option>
+            <option value="Esportes e Atividades Físicas">Esportes e Atividades Físicas</option>
+            <option value="Finanças e Investimentos">Finanças e Investimentos</option>
+            <option value="Voluntariado e Causas Sociais">Voluntariado e Causas Sociais</option>
+            <option value="Viagens e Turismo">Viagens e Turismo</option>
+            <option value="Empreendedorismo e Negócios">Empreendedorismo e Negócios</option>
+            <option value="Eventos e Organização">Eventos e Organização</option>
+        </select>
+        <p id="txtCategoria"></p>
+
+        </div>
+
+        <!-- CAMPO PRIVACIDADE -->
+        <div class="campo">
+        <label for="privacidade">Privacidade da sala:</label>
+        <div class="linha"></div>
+        <select name="privacidade" id="privacidade">
+            <option value="pública" selected>Pública</option>
+            <option value="privada">Privada</option>
+        </select>
+        <p id="txtPrivacidade"></p>
+        </div>
+
+        <!-- CAMPO DESCRIÇÃO -->
+        <div class="campo">
+        <label for="descricao">Descrição da sala</label>
+        <div class="linha"></div>
+        <textarea name="descricao" id="descricao" placeholder="Escreva aqui uma breve descrição da sala"></textarea>
+        <p id="txtDescricao"></p>
+        </div>
+
+        <button id="criar" type="submit">Criar Sala</button>
+    </form>
+    
+
+    <script type="module" src="/js/criar-sala.js"></script>
+
+</body>
+</html>
+

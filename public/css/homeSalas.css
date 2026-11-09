@@ -1,0 +1,544 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "Reddit Sans", sans-serif;
+    background-color: #E2E2E2;
+    position: relative;
+    color: #242424;
+}
+
+.divPesquisar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+
+.input-pesquisa {
+    display: flex;
+    gap: 2px;
+    background-color: rgb(181, 181, 181);
+    padding: 1px;
+    border-radius: 3px;
+}
+
+.input-pesquisa input {
+    border: none;
+    width: 270px;
+    padding: 7px;
+    border-radius: 3px;
+    font-size: 15px;
+    font-family: "Reddit Sans", sans-serif;
+    outline: none;
+}
+
+.input-pesquisa input::placeholder {
+    font-family: "Reddit Sans", sans-serif;
+}
+
+.img-pesquisa {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(37, 0, 97);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in;
+    border: none;
+}
+
+.img-pesquisa:hover {
+    background-color: rgb(54, 0, 140);
+    transition: background-color 0.3s ease-in;
+}
+
+
+/* Container das salas */
+#salas-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+}
+
+/* Card de cada sala */
+.sala {
+    width: 80%;
+    background-color: #FFFFFF;
+    border-radius: 12px;
+
+    border-bottom: 4px solid #300066;
+
+    padding: 24px 28px;
+
+    box-shadow: 0 4px 12px rgba(48, 0, 102, 0.08);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.sala:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 18px rgba(48, 0, 102, 0.14);
+}
+
+/* Parte superior do card */
+.area-superior {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+
+    padding-bottom: 22px;
+}
+
+/* Título e categoria */
+.titulo-tema {
+    flex: 1;
+    min-width: 180px;
+}
+
+.titulo-tema h3 {
+    font-size: 23px;
+    font-weight: 700;
+    color: #300066;
+
+    margin-bottom: 8px;
+    overflow-wrap: anywhere;
+}
+
+.titulo-tema h4 {
+    display: inline-block;
+
+    background-color: #F0E8FA;
+    color: #300066;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    padding: 6px 11px;
+    border-radius: 20px;
+}
+
+/* Descrição */
+.descricao {
+    flex: 2;
+    min-width: 0;
+}
+
+.descricao p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #555555;
+
+    overflow-wrap: anywhere;
+
+    /* Limita a descrição */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+
+    overflow: hidden;
+}
+
+/* Quantidade de participantes */
+.inscritos {
+    flex: 0 0 auto;
+    min-width: 130px;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.inscritos p {
+    background-color: #F5F1FA;
+    color: #300066;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    padding: 9px 12px;
+    border-radius: 8px;
+
+    white-space: nowrap;
+}
+
+/* Parte inferior do card */
+.area-inferior {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    padding-top: 18px;
+    border-top: 1px solid #E8E0F0;
+}
+
+/* Botões */
+#opcoes {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#opcoes button {
+    border: none;
+    border-radius: 7px;
+
+    padding: 10px 20px;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+/* Botão Entrar */
+#inscrever {
+    background-color: #300066;
+    color: #FFFFFF;
+}
+
+#inscrever:hover {
+    background-color: #4A1090;
+    transform: translateY(-1px);
+}
+
+/* Privacidade */
+.privacidade {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#privacidade {
+    color: #666666;
+    background-color: #F3F3F3;
+
+    padding: 7px 12px;
+    border-radius: 20px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    text-transform: capitalize;
+}
+
+ /* OPÇÕES */
+
+ .pesquisa{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #2B0068;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.criacao{
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #2B0068;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.opcoes {
+    position: fixed;
+    right: 20px;
+
+    width: 50px;
+    height: 50px;
+
+    background-color: #2B0068;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 100px;
+    cursor: pointer;
+
+    z-index: 100;
+    transition: background-color 0.2s ease;
+}
+
+.pesquisa:hover {
+    background-color: #3e0194;
+}
+
+#pesquisar {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 101;
+
+    text-decoration: none;
+    font-size: 15px;
+    color: white;
+    font-family: "Reddit Sans", sans-serif;
+
+    background-color: #3e0194;
+
+    width: 130px;
+    padding: 7px;
+
+    border-radius: 5px;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateX(0);
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.3s ease,
+        visibility 0.3s ease;
+}
+
+.pesquisa:hover #pesquisar {
+    opacity: 1;
+    visibility: visible;
+
+    transform: translateX(-70px);
+}
+#criar {
+    position: absolute;
+    right: 0;
+    bottom: 0px;
+    z-index: 101;
+
+    text-decoration: none;
+    font-size: 15px;
+    color: white;
+    font-family: "Reddit Sans", sans-serif;
+
+    background-color: #3e0194;
+
+    width: 130px;
+    padding: 7px;
+
+    border-radius: 5px;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateX(0);
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.3s ease,
+        visibility 0.3s ease;
+}
+
+.criacao:hover #criar {
+    opacity: 1;
+    visibility: visible;
+
+    transform: translateX(-70px);
+}
+.criacao:hover{
+    background-color: #3e0194; ;
+}
+#solicitacao {
+    position: absolute;
+    right: 0;
+    bottom: 0px;
+    z-index: 101;
+
+    text-decoration: none;
+    font-size: 15px;
+    color: white;
+    font-family: "Reddit Sans", sans-serif;
+
+    background-color: #3e0194;
+
+    width: 130px;
+    padding: 7px;
+
+    border-radius: 5px;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateX(0);
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.3s ease,
+        visibility 0.3s ease;
+}
+
+.mensagem{
+    position: fixed;
+    bottom: 180px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #2B0068;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.mensagem:hover #solicitacao {
+    opacity: 1;
+    visibility: visible;
+
+    transform: translateX(-70px);
+}
+.mensagem:hover{
+    background-color: #3e0194; ;
+}
+
+/* =========================
+   SEM EVENTOS
+========================= */
+
+.sem-eventos {
+    width: 90%;
+    max-width: 750px;
+    margin: 40px auto;
+    padding: 55px 30px;
+    background: white;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+.icone-sem-eventos {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 25px;
+    background: #f2eafa;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sem-eventos h2 {
+    color: #310066;
+    margin-bottom: 12px;
+}
+
+.sem-eventos p {
+    color: #777;
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.btn-criar-evento {
+    display: inline-block;
+    padding: 13px 25px;
+    background: #310066;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-criar-evento:hover {
+    background: #5100a0;
+    transform: translateY(-2px);
+}
+/* Responsividade para tablets e celulares */
+@media (max-width: 768px) {
+    #salas-container {
+        width: 94%;
+        margin: 25px auto;
+        gap: 18px;
+    }
+
+    .sala {
+        padding: 20px;
+    }
+
+    .area-superior {
+        flex-wrap: wrap;
+        gap: 20px;
+        max-height: 150px;
+    }
+
+    .titulo-tema {
+        flex: 1 1 40%;
+    }
+
+    .descricao {
+        flex: 1 1 100%;
+        order: 3;
+    }
+
+    .inscritos {
+        flex: 0 1 auto;
+        margin-left: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .sala {
+        padding: 17px;
+    }
+
+    .titulo-tema h3 {
+        font-size: 20px;
+    }
+
+    .area-inferior {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    #opcoes {
+        width: 100%;
+        gap: 8px;
+    }
+
+    #opcoes button {
+        flex: 1;
+        padding: 10px 12px;
+    }
+
+    .privacidade {
+        justify-content: flex-start;
+    }
+}

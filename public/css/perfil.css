@@ -1,0 +1,902 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #E2E2E2;
+    font-family: "Reddit Sans", sans-serif;
+}
+
+/* =========================
+   CONTEÚDO PRINCIPAL
+========================= */
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* =========================
+   CORPO DO PERFIL
+========================= */
+
+.perfil-body {
+    position: relative;
+    width: 60vw;
+    max-width: 900px;
+    min-height: 1000px;
+    margin: 30px;
+    padding: 40px;
+    background-color: rgb(245, 245, 245);
+    border-radius: 5px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+.perfil-header {
+    margin-bottom: 70px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #ddd;
+}
+
+.dados {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.dados h2 {
+    color: #2B0068;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.dados p {
+    color: rgb(80, 80, 80);
+    font-size: 16px;
+}
+
+/* =========================
+   RECADO
+========================= */
+
+.msg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 70px;
+}
+
+.msg h4 {
+    margin-bottom: 8px;
+    color: #2B0068;
+    font-size: 20px;
+}
+
+.msg p {
+    color: gray;
+    font-size: 16px;
+}
+
+.msg textarea {
+    width: 500px;
+    height: 200px;
+    padding: 15px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    outline: none;
+    resize: vertical;
+    background-color: rgb(236, 236, 236);
+    font-family: "Reddit Sans", sans-serif;
+    font-size: 16px;
+}
+
+.msg textarea:focus {
+    border-color: #340272;
+    background-color: white;
+}
+
+/* =========================
+   EVENTOS - CONTÊINER
+========================= */
+
+.eventos {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 24px;
+    margin: 28px 0 24px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid #ded8e7;
+}
+
+/* =========================
+   LISTAGENS DE EVENTOS
+========================= */
+
+#eventosCriados,
+#eventosInscritos {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    flex: 1;
+    gap: 14px;
+    width: 100%;
+    min-width: 0;
+    min-height: 80px;
+    margin-bottom: 24px;
+    padding: 18px;
+    background: #f0ebf7;
+    border: 1px solid #e3d8f1;
+    border-radius: 14px;
+}
+
+/* =========================
+   CONTADORES
+========================= */
+
+.section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    width: 180px;
+    min-height: 90px;
+    margin-bottom: 24px;
+    padding: 16px;
+    border-radius: 14px;
+    font-size: 13px;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(43, 0, 104, 0.09);
+}
+
+.section h3 {
+    margin-bottom: 2px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.section p {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.criados {
+    color: #340272;
+    background-color: #eee4fc;
+    border: 1px solid #dcc9f4;
+}
+
+.inscritos {
+    color: #28216f;
+    background-color: #e4e9ff;
+    border: 1px solid #cbd3fa;
+}
+
+/* =========================
+   CARD DE EVENTO
+========================= */
+
+.evento {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    width: 100%;
+    min-width: 0;
+    padding: 20px 22px;
+
+    background: #fff;
+    border: 1px solid #e7e0ee;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(43, 0, 104, 0.05);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.evento:hover {
+    transform: translateY(-3px);
+    border-color: #d1b8ef;
+    box-shadow: 0 9px 22px rgba(43, 0, 104, 0.11);
+}
+
+/* =========================
+   INFORMAÇÕES DO EVENTO
+========================= */
+
+.info-evento {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    gap: 7px;
+}
+
+.evento #tituloEvento {
+    margin-bottom: 0;
+    color: #340272;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.evento #enderecoEvento {
+    color: #777080;
+    font-size: 13px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+/* =========================
+   AÇÕES DOS EVENTOS
+   DOIS BOTÕES À DIREITA
+========================= */
+
+.acoes-evento {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    flex-shrink: 0;
+    gap: 10px;
+    width: 150px;
+}
+
+/* =========================
+   LINKS DOS EVENTOS
+========================= */
+
+.evento .verEvento {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    min-height: 40px;
+    padding: 10px;
+
+    border: 1px solid #340272;
+    border-radius: 8px;
+
+    background-color: #340272;
+    color: white;
+
+    text-decoration: none;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.3;
+
+    white-space: normal;
+    overflow-wrap: anywhere;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.evento .verEvento:hover {
+    background-color: #4c0694;
+    border-color: #4c0694;
+}
+
+.evento .verEvento:active {
+    transform: scale(0.98);
+}
+
+/* Caso um evento tenha apenas um link */
+.evento > .verEvento {
+    flex-shrink: 0;
+    width: 150px;
+}
+
+/* =========================
+   BOTÕES DE VER MAIS
+========================= */
+
+#eventosCriados button,
+#eventosInscritos button {
+    align-self: center;
+    width: min(100%, 220px);
+    padding: 11px 16px;
+    border: 1px solid #340272;
+    border-radius: 8px;
+    background-color: #340272;
+    color: white;
+    font-family: "Reddit Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+#eventosCriados button:hover,
+#eventosInscritos button:hover {
+    background-color: #4c0694;
+    transform: translateY(-1px);
+}
+
+#eventosCriados button a,
+#eventosInscritos button a {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+/* =========================
+   FOCO ACESSÍVEL
+========================= */
+
+.evento a:focus-visible,
+#eventosCriados button:focus-visible,
+#eventosInscritos button:focus-visible,
+#salasCriadas button:focus-visible,
+#salasInscritas button:focus-visible {
+    outline: 3px solid #c8a8f0;
+    outline-offset: 3px;
+}
+
+/* =========================
+   INFORMAÇÕES DO PERFIL
+========================= */
+
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 70px;
+    margin-bottom: 60px;
+}
+
+.info h3 {
+    color: #340272;
+    font-weight: 600;
+}
+
+.info textarea {
+    width: 80%;
+    min-width: 500px;
+    height: 200px;
+    max-height: 300px;
+    margin-top: 15px;
+    padding: 12px;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    outline: none;
+    resize: vertical;
+    background-color: rgb(236, 236, 236);
+    font-family: "Reddit Sans", sans-serif;
+    font-size: 17px;
+}
+
+.info textarea:focus {
+    border-color: #340272;
+    background-color: white;
+}
+
+/* =========================
+   CATEGORIAS / QUALIDADES
+========================= */
+
+.categorias {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 80px;
+}
+
+.categorias h4 {
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* =========================
+   INPUT DE CATEGORIA
+========================= */
+
+.input-cate {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.categorias input {
+    width: 300px;
+    height: 38px;
+    padding: 0 10px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    outline: none;
+    background-color: rgb(214, 214, 214);
+    font-family: "Reddit Sans", sans-serif;
+    font-size: 15px;
+}
+
+.categorias input:focus {
+    border-color: #340272;
+    background-color: white;
+}
+
+/* =========================
+   BOTÃO DE QUALIDADE
+========================= */
+
+.categorias button {
+    padding: 7px 14px;
+    border: none;
+    border-radius: 4px;
+    background-color: #340272;
+    color: white;
+    font-family: "Reddit Sans", sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.categorias button:hover {
+    background-color: #4c0694;
+}
+
+/* =========================
+   LISTA DE QUALIDADES
+========================= */
+
+.listar-qualidade {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    max-width: 600px;
+    margin-top: 20px;
+}
+
+.listar-qualidade p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 7px 13px;
+    border: 1px solid #d8b8f5;
+    border-radius: 20px;
+    background-color: #eee0ff;
+    color: #340272;
+    font-size: 15px;
+}
+
+.listar-qualidade p #excluir {
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.listar-qualidade p #excluir:hover {
+    background-color: rgba(153, 111, 243, 0.388);
+}
+
+.listar-qualidade #excluir img {
+    display: block;
+}
+
+/* =========================
+   BOTÃO SALVAR PERFIL
+========================= */
+
+#btn {
+    position: absolute;
+    right: 20px;
+    bottom: 15px;
+    width: 150px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #340272;
+    color: white;
+    font-family: "Reddit Sans", sans-serif;
+    font-size: 19px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#btn:hover {
+    background-color: #4c0694;
+}
+
+/* =========================
+   SALAS - CONTADORES
+========================= */
+
+.salas {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 30px;
+    margin: 25px 0;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #ddd;
+}
+
+.salas .section {
+    width: 100%;
+    max-width: 220px;
+    min-height: 100px;
+    margin-bottom: 0;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.salas .criados {
+    background-color: #eee4fc;
+    color: #340272;
+    border: 1px solid #d9c5f4;
+}
+
+.salas .inscritas {
+    background-color: #e4e9ff;
+    color: #28216f;
+    border: 1px solid #cbd3fa;
+}
+
+.salas .section h3 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.salas .section p {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+/* =========================
+   LISTAGEM DAS SALAS
+========================= */
+
+#salasCriadas,
+#salasInscritas {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    flex: 1;
+    gap: 14px;
+    min-width: 0;
+    min-height: 60px;
+    margin: 0 10px 30px;
+    padding: 15px;
+    background-color: #f3f0f7;
+    border-radius: 12px;
+}
+
+/* =========================
+   CARD INDIVIDUAL DA SALA
+========================= */
+
+.sala {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    min-width: 0;
+    padding: 18px;
+    background-color: #fff;
+    border: 1px solid #e3d9ef;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(43, 0, 104, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sala:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(43, 0, 104, 0.12);
+}
+
+/* =========================
+   INFORMAÇÕES DA SALA
+========================= */
+
+.info-sala {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    gap: 7px;
+}
+
+.info-sala #tituloSala {
+    color: #2B0068;
+    font-size: 16px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.info-sala #temaSala {
+    display: inline-block;
+    width: fit-content;
+    max-width: 100%;
+    padding: 5px 10px;
+    border-radius: 6px;
+    background-color: #f0e8fa;
+    color: #5a268e;
+    font-size: 12px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+/* =========================
+   LINK VISUALIZAR SALA
+========================= */
+
+.verSala {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    padding: 10px 15px;
+    border: 1px solid #340272;
+    border-radius: 7px;
+    background-color: #340272;
+    color: white;
+    text-decoration: none;
+    font-family: "Reddit Sans", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.verSala:hover {
+    background-color: #4c0694;
+}
+
+/* =========================
+   BOTÕES VER MAIS SALAS
+========================= */
+
+#verTodasCriadas,
+#verTodasInscritas {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbb5e8;
+    border-radius: 8px;
+    background-color: transparent;
+    color: #340272;
+    font-family: "Reddit Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#verTodasCriadas:hover,
+#verTodasInscritas:hover {
+    background-color: #eee4fc;
+}
+
+#verTodasCriadas a {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+/* =========================
+   RESPONSIVIDADE - TABLETS
+========================= */
+
+@media (max-width: 800px) {
+    .perfil-body {
+        width: 90vw;
+        padding: 30px;
+        margin: 20px;
+    }
+
+    .eventos {
+        gap: 20px;
+        margin: 20px 0;
+    }
+
+    #eventosCriados,
+    #eventosInscritos {
+        padding: 14px;
+    }
+
+    .evento {
+        gap: 12px;
+        padding: 16px;
+    }
+
+    .evento #tituloEvento {
+        font-size: 15px;
+    }
+
+    .acoes-evento {
+        width: 135px;
+    }
+
+    .evento > .verEvento {
+        width: 135px;
+    }
+
+    .section {
+        width: 150px;
+    }
+
+    .info textarea {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .msg textarea {
+        width: 100%;
+    }
+
+    .categorias input {
+        width: 250px;
+    }
+
+    .salas {
+        gap: 15px;
+    }
+
+    #salasCriadas,
+    #salasInscritas {
+        margin: 0 0 25px;
+        padding: 10px;
+    }
+
+    .sala {
+        padding: 14px;
+    }
+
+    .verSala {
+        padding: 9px 11px;
+    }
+}
+
+/* =========================
+   RESPONSIVIDADE - CELULARES
+========================= */
+
+@media (max-width: 550px) {
+    .perfil-body {
+        width: 95vw;
+        padding: 20px;
+    }
+
+    .eventos {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #eventosCriados,
+    #eventosInscritos {
+        width: 100%;
+        padding: 12px;
+    }
+
+    /* Eventos: informações à esquerda,
+       botões à direita */
+    .evento {
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 10px;
+    }
+
+    .info-evento {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .evento #tituloEvento {
+        font-size: 14px;
+    }
+
+    .evento #enderecoEvento {
+        font-size: 12px;
+    }
+
+    .acoes-evento {
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        width: 115px;
+        gap: 8px;
+    }
+
+    .evento .verEvento {
+        width: 100%;
+        min-height: 38px;
+        padding: 8px 5px;
+        font-size: 12px;
+    }
+
+    .evento > .verEvento {
+        width: 115px;
+    }
+
+    .section {
+        width: 80%;
+        margin-bottom: 10px;
+    }
+
+    .input-cate {
+        width: 100%;
+    }
+
+    .categorias input {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .info textarea,
+    .msg textarea {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .categorias {
+        margin-bottom: 90px;
+    }
+
+    .salas {
+        gap: 10px;
+    }
+
+    .salas .section {
+        min-height: 85px;
+        padding: 12px 6px;
+    }
+
+    .salas .section h3 {
+        font-size: 13px;
+    }
+
+    .salas .section p {
+        font-size: 21px;
+    }
+
+    #salasCriadas,
+    #salasInscritas {
+        padding: 8px;
+    }
+
+    .sala {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .info-sala {
+        width: 100%;
+    }
+
+    .verSala {
+        width: 100%;
+    }
+}

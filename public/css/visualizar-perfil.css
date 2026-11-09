@@ -1,0 +1,628 @@
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #E2E2E2;
+    font-family: "Reddit Sans", sans-serif;
+}
+
+/* =========================
+   CONTEÚDO PRINCIPAL
+========================= */
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* =========================
+   CORPO DO PERFIL
+========================= */
+
+.perfil-body {
+    position: relative;
+    width: 60vw;
+    max-width: 900px;
+    min-height: 500px;
+    margin: 30px;
+    padding: 40px;
+    background-color: rgb(245, 245, 245);
+    border-radius: 5px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+#conteudoPerfil[hidden],
+#mensagemPerfil[hidden] {
+    display: none;
+}
+
+#mensagemPerfil {
+    padding: 30px;
+    color: #666;
+    font-size: 17px;
+    text-align: center;
+}
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+.perfil-header {
+    margin-bottom: 70px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #ddd;
+}
+
+.dados {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.dados h2 {
+    color: #2B0068;
+    font-size: 28px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.dados p {
+    color: rgb(80, 80, 80);
+    font-size: 16px;
+    overflow-wrap: anywhere;
+}
+
+/* =========================
+   RECADO
+========================= */
+
+.msg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 70px;
+}
+
+.msg h4 {
+    margin-bottom: 15px;
+    color: #2B0068;
+    font-size: 20px;
+}
+
+.msg p {
+    width: 80%;
+    min-height: 120px;
+    padding: 20px;
+    border: 1px solid #e3d8f1;
+    border-radius: 7px;
+    background-color: rgb(236, 236, 236);
+    color: #444;
+    font-size: 16px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+/* =========================
+   EVENTOS - CONTÊINER
+========================= */
+
+.eventos {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 24px;
+    margin: 28px 0 24px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid #ded8e7;
+}
+
+/* =========================
+   CONTADORES
+========================= */
+
+.section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    width: 180px;
+    min-height: 90px;
+    padding: 16px;
+    border-radius: 14px;
+    font-size: 13px;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(43, 0, 104, 0.09);
+}
+
+.section h3 {
+    margin-bottom: 2px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.section p {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.criados {
+    color: #340272;
+    background-color: #eee4fc;
+    border: 1px solid #dcc9f4;
+}
+
+.inscritos,
+.inscritas {
+    color: #28216f;
+    background-color: #e4e9ff;
+    border: 1px solid #cbd3fa;
+}
+
+/* =========================
+   LISTAGENS DE EVENTOS
+========================= */
+
+#eventosCriados,
+#eventosInscritos {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    flex: 1;
+    gap: 14px;
+    width: 100%;
+    min-width: 0;
+    min-height: 80px;
+    padding: 18px;
+    background: #f0ebf7;
+    border: 1px solid #e3d8f1;
+    border-radius: 14px;
+}
+
+/* =========================
+   CARD DE EVENTO
+========================= */
+
+.evento {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+
+    width: 100%;
+    min-width: 0;
+    padding: 20px 22px;
+
+    background: #fff;
+    border: 1px solid #e7e0ee;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(43, 0, 104, 0.05);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.evento:hover {
+    transform: translateY(-3px);
+    border-color: #d1b8ef;
+    box-shadow: 0 9px 22px rgba(43, 0, 104, 0.11);
+}
+
+/* =========================
+   INFORMAÇÕES DO EVENTO
+========================= */
+
+.info-evento {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    gap: 7px;
+}
+
+.evento .tituloEvento {
+    color: #340272;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.evento .enderecoEvento {
+    color: #777080;
+    font-size: 13px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+/* =========================
+   SALAS - CONTÊINER
+========================= */
+
+.salas {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 30px;
+    margin: 25px 0;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* =========================
+   SALAS - CONTADORES
+========================= */
+
+.salas .section {
+    width: 100%;
+    max-width: 220px;
+    min-height: 100px;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.salas .criados {
+    background-color: #eee4fc;
+    color: #340272;
+    border: 1px solid #d9c5f4;
+}
+
+.salas .inscritas {
+    background-color: #e4e9ff;
+    color: #28216f;
+    border: 1px solid #cbd3fa;
+}
+
+.salas .section h3 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.salas .section p {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+/* =========================
+   LISTAGEM DAS SALAS
+========================= */
+
+#salasCriadas,
+#salasInscritas {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    flex: 1;
+    gap: 14px;
+    min-width: 0;
+    min-height: 80px;
+    padding: 15px;
+    background-color: #f3f0f7;
+    border: 1px solid #e3d8f1;
+    border-radius: 12px;
+}
+
+/* =========================
+   CARD INDIVIDUAL DA SALA
+========================= */
+
+.sala {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    min-width: 0;
+    padding: 18px;
+    background-color: #fff;
+    border: 1px solid #e3d9ef;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(43, 0, 104, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sala:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(43, 0, 104, 0.12);
+}
+
+/* =========================
+   INFORMAÇÕES DA SALA
+========================= */
+
+.info-sala {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    gap: 7px;
+}
+
+.info-sala .tituloSala {
+    color: #2B0068;
+    font-size: 16px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.info-sala .temaSala {
+    display: inline-block;
+    width: fit-content;
+    max-width: 100%;
+    padding: 5px 10px;
+    border-radius: 6px;
+    background-color: #f0e8fa;
+    color: #5a268e;
+    font-size: 12px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+/* =========================
+   BOTÃO VER MAIS
+========================= */
+
+.verMais {
+    align-self: center;
+    width: min(100%, 220px);
+    padding: 11px 16px;
+    border: 1px solid #340272;
+    border-radius: 8px;
+    background-color: #340272;
+    color: white;
+    font-family: "Reddit Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.verMais:hover {
+    background-color: #4c0694;
+    transform: translateY(-1px);
+}
+
+.verMais:focus-visible {
+    outline: 3px solid #c8a8f0;
+    outline-offset: 3px;
+}
+
+/* =========================
+   INFORMAÇÕES DO PERFIL
+========================= */
+
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 70px;
+    margin-bottom: 60px;
+}
+
+.info h3 {
+    color: #340272;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.info p {
+    width: 80%;
+    min-height: 150px;
+    margin-top: 15px;
+    padding: 18px;
+    border: 1px solid #e3d8f1;
+    border-radius: 7px;
+    background-color: rgb(236, 236, 236);
+    color: #444;
+    font-size: 16px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+/* =========================
+   CATEGORIAS / QUALIDADES
+========================= */
+
+.categorias {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.categorias h4 {
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* =========================
+   LISTA DE QUALIDADES
+========================= */
+
+.listar-qualidade {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    max-width: 600px;
+}
+
+.listar-qualidade p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 7px 13px;
+    border: 1px solid #d8b8f5;
+    border-radius: 20px;
+    background-color: #eee0ff;
+    color: #340272;
+    font-size: 15px;
+    overflow-wrap: anywhere;
+}
+
+/* =========================
+   MENSAGENS DE LISTA VAZIA
+========================= */
+
+.sem-registros {
+    padding: 15px;
+    color: #777;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* =========================
+   RESPONSIVIDADE - TABLETS
+========================= */
+
+@media (max-width: 800px) {
+
+    .perfil-body {
+        width: 90vw;
+        padding: 30px;
+        margin: 20px;
+    }
+
+    .eventos,
+    .salas {
+        gap: 15px;
+    }
+
+    #eventosCriados,
+    #eventosInscritos,
+    #salasCriadas,
+    #salasInscritas {
+        padding: 12px;
+    }
+
+    .evento,
+    .sala {
+        padding: 16px;
+    }
+
+    .section {
+        width: 150px;
+    }
+
+    .info p,
+    .msg p {
+        width: 100%;
+    }
+
+}
+
+/* =========================
+   RESPONSIVIDADE - CELULARES
+========================= */
+
+@media (max-width: 550px) {
+
+    .perfil-body {
+        width: 95vw;
+        padding: 20px;
+        margin: 15px 0;
+    }
+
+    .perfil-header {
+        margin-bottom: 40px;
+    }
+
+    .dados h2 {
+        font-size: 24px;
+    }
+
+    .dados p {
+        font-size: 14px;
+    }
+
+    .msg {
+        margin-bottom: 45px;
+    }
+
+    .msg p {
+        width: 100%;
+        min-height: 90px;
+    }
+
+    .eventos,
+    .salas {
+        gap: 12px;
+        margin: 20px 0;
+    }
+
+    .listagens {
+        flex-direction: column;
+    }
+
+    #eventosCriados,
+    #eventosInscritos,
+    #salasCriadas,
+    #salasInscritas {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .section {
+        flex: 1;
+        min-width: 0;
+        padding: 12px 6px;
+    }
+
+    .section h3,
+    .salas .section h3 {
+        font-size: 12px;
+    }
+
+    .section p,
+    .salas .section p {
+        font-size: 21px;
+    }
+
+    .evento,
+    .sala {
+        padding: 14px;
+    }
+
+    .evento .tituloEvento,
+    .info-sala .tituloSala {
+        font-size: 14px;
+    }
+
+    .evento .enderecoEvento {
+        font-size: 12px;
+    }
+
+    .info {
+        margin-top: 45px;
+        margin-bottom: 45px;
+    }
+
+    .info p {
+        width: 100%;
+        min-height: 100px;
+    }
+
+    .categorias h4 {
+        text-align: center;
+    }
+
+}

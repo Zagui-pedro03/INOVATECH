@@ -1,0 +1,429 @@
+
+/* =========================
+   CONFIGURAÇÕES GERAIS
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #E2E2E2;
+    font-family: "Reddit Sans", sans-serif;
+    min-height: 100vh;
+    color: #333333;
+}
+a{
+    text-decoration: none;
+    color: #2B0068;
+    font-weight: 600;
+}
+
+/* =========================
+   CONTAINER DOS EVENTOS
+========================= */
+
+#eventos-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto 60px;
+    position: relative;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.evento {
+    width: 100%;
+    background-color: #FFFFFF;
+    padding: 25px 30px;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    position: relative;
+    z-index: 10;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+
+    transition:
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+}
+
+.evento:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.evento.expandido {
+    z-index: 100;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+.evento-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.titulo-tema {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.evento-titulo {
+    font-size: 23px;
+    font-weight: 700;
+    color: #2B0068;
+    margin-bottom: 5px;
+}
+
+.evento-tema {
+    color: #777777;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* =========================
+   INSCRIÇÕES
+========================= */
+
+.inscricoes-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    position: relative;
+}
+
+.evento-pessoas {
+    color: #666666;
+    font-size: 14px;
+}
+
+.inscricoes-info .inscritostxt {
+    color: #2B0068;
+    font-weight: 700;
+}
+
+/* =========================
+   AÇÕES
+========================= */
+
+.evento-acoes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    border-top: 1px solid #EEEEEE;
+    padding-top: 18px;
+}
+
+/* =========================
+   BOTÃO VISUALIZAR
+========================= */
+
+.btn-visualizar-evento {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #2B0068;
+    color: #FFFFFF;
+    text-decoration: none;
+
+    border: 2px solid #2B0068;
+    border-radius: 6px;
+    padding: 9px 23px;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.btn-visualizar-evento:hover {
+    background-color: #4600A8;
+    border-color: #4600A8;
+    transform: translateY(-1px);
+}
+
+/* =========================
+   BOTÃO VER MAIS
+========================= */
+
+.btn-expandir {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+
+    color: #2B0068;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    padding: 9px 12px;
+    margin-left: auto;
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.btn-expandir:hover {
+    color: #6B20C5;
+    background-color: #F5F0FC;
+}
+
+/* =========================
+   SETA
+========================= */
+
+.seta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: transform 0.3s ease;
+}
+
+.seta img {
+    display: block;
+    width: 22px;
+    height: auto;
+}
+
+.evento.expandido .btn-expandir .seta {
+    transform: rotate(180deg);
+}
+
+/* =========================
+   ÁREA EXPANDIDA
+========================= */
+
+.evento-descricao {
+    position: absolute;
+    top: calc(100% - 10px);
+    left: 0;
+    width: 100%;
+
+    background-color: #FFFFFF;
+    border-radius: 0 0 10px 10px;
+    border-top: 1px solid #EAEAEA;
+
+    padding: 35px 30px 25px;
+
+    color: #555555;
+    line-height: 1.7;
+
+    z-index: -1;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transform: translateY(-20px);
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.35s ease,
+        visibility 0.35s ease;
+}
+
+/* Card expandido */
+
+.evento.expandido .evento-descricao {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+/* =========================
+   TÍTULOS E INFORMAÇÕES
+========================= */
+
+.evento-descricao h3 {
+    color: #2B0068;
+    font-size: 18px;
+}
+
+.evento-descricao p {
+    margin-top: 7px;
+    font-size: 15px;
+    overflow-wrap: anywhere;
+}
+
+.evento-descricao hr {
+    border: none;
+    border-top: 1px solid #EEEEEE;
+    margin: 15px 0;
+}
+
+/* =========================
+   BOTÃO RECOLHER
+========================= */
+
+.btn-recolher {
+    margin-top: 15px;
+    margin-left: auto;
+
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+
+    color: #2B0068;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    padding: 8px 12px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.btn-recolher:hover {
+    color: #6B20C5;
+    background-color: #F5F0FC;
+}
+
+.btn-recolher img {
+    transform: rotate(180deg);
+}
+
+
+/* =================================
+   BOTÃO ADICIONAR PARTICIPANTES
+================================= */
+
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 700px) {
+
+    #eventos-container {
+        width: 94%;
+        margin: 25px auto 40px;
+    }
+
+    .evento {
+        padding: 20px;
+        margin-bottom: 35px;
+    }
+
+    .evento-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .evento-titulo {
+        font-size: 20px;
+    }
+
+    .inscricoes-info {
+        align-items: flex-start;
+    }
+
+    .evento-acoes {
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    .btn-visualizar-evento {
+        padding: 9px 15px;
+    }
+
+    .evento-descricao {
+        padding: 30px 20px 20px;
+    }
+}
+
+@media (max-width: 450px) {
+
+    .evento {
+        padding: 17px;
+    }
+
+    .evento-titulo {
+        font-size: 18px;
+    }
+
+    .evento-pessoas {
+        font-size: 13px;
+        white-space: normal;
+    }
+
+    .evento-acoes {
+        align-items: center;
+    }
+
+    .btn-visualizar-evento {
+        padding: 9px 12px;
+        font-size: 13px;
+    }
+
+    .btn-expandir {
+        padding: 9px 6px;
+        font-size: 13px;
+    }
+
+    .evento-descricao {
+        padding: 25px 17px 20px;
+    }
+
+    .evento-descricao h3 {
+        font-size: 16px;
+    }
+
+    .evento-descricao p {
+        font-size: 14px;
+    }
+}
+
+/* =========================
+   ACESSIBILIDADE
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .evento,
+    .evento-descricao,
+    .seta,
+    .btn-expandir,
+    .btn-recolher,
+    .btn-visualizar-evento {
+        transition: none;
+    }
+}

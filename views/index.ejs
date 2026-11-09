@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Home</title>
+
+<link rel="icon" type="image/png" href="/assets/img/favicon/icone_2.png">
+    <link rel="stylesheet" href="/css/home.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Reddit+Sans:ital,wght@0,200..900;1,200..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet"
+    >
+</head>
+
+<body>
+
+    <%- include("./partials/header") %>
+    
+    <main class="eventos-container">  
+    </main>
+     <div id="semEventos" class="sem-eventos" style="display: none;">
+
+    <div class="icone-sem-eventos">
+        <span><img src="/assets/img/calendary_icone.png" width="50" height="50"></span>
+    </div>
+
+    <h2>Nenhum evento por enquanto</h2>
+
+    <p>
+        Ainda não há eventos disponíveis.<br>
+        Que tal criar o primeiro e reunir a comunidade?
+    </p>
+
+    <a href="/eventos/criar-evento" class="btn-criar-evento">
+        + Criar evento
+    </a>
+
+</div>
+    <main class="usuarios-container">
+        
+    </main>
+ <%- include("./partials/footer") %>
+    <script type="module" src="/js/home.js"></script>
+
+</body>
+</html>
+
+<!--
+    FORMULARIO DE CRIAR EVENTOS:
+
+    Observação(opcional)
+    Tema sobre o evento
+
+
+    SALAS:
+
+    Campos: Nome da sala, Descrição da sala, 
+
+-->

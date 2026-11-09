@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Eventos</title>
+
+<link rel="icon" type="image/png" href="/assets/img/favicon/icone_2.png">
+    <link rel="stylesheet" href="/css/VisualizarEventosCriados.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Reddit+Sans:ital,wght@0,200..900;1,200..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet"
+    >
+</head>
+
+<body>
+
+    <%- include("../partials/header") %>
+
+    <main class="eventos-container">
+        <p id="i" style="display: none;"><%= i %></p>
+
+        <div id="titulo">
+            <h2 id="nomeEvento"></h2>
+            <h4 id="temaEvento"></h4>
+        </div>
+
+        <div id="detalhes">
+            <p id="descricao"></p>
+
+            <p id="limitePessoas"></p>
+        </div>
+
+        <div id="info-container">
+            <div id="info">
+                <h3>Data</h3>
+                <h3>Local</h3>
+
+                <p id="data"></p>
+                
+
+                <p id="local"></p>
+               
+
+                <h3>Horário de início</h3>
+                <h3>Horário de término</h3>
+
+                <p id="horarioInicio"></p>
+
+                <p id="horariotermino"></p>
+                
+
+            </div>
+        </div>
+
+        <div id="adicional">
+            <h3>Criador:</h3>
+            <h3 id="criador"></h3>
+        </div>
+
+        <br>
+
+        <h3>Inscritos</h3>
+
+        <div id="inscritos"></div>
+        <div class="divInscrito">
+        <button id="inscrito" style="display: none;">Inscrever-se</button>
+        </div>
+    </main>
+ <%- include("../partials/footer") %>
+    <script type="module" src="/js/visualizar-evento.js"></script>
+</body>
+</html>

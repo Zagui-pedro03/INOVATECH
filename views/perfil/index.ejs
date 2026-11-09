@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Perfil</title>
+
+    <link rel="icon" type="image/png" href="/assets/img/favicon/icone_2.png">
+    <link rel="stylesheet" href="../../css/perfil.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Reddit+Sans:ital,wght@0,200..900;1,200..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <%- include("../partials/header") %>
+
+    <div class="content">
+
+      <form class="perfil-body" id="formulario">
+
+        <!-- =========================
+             CABEÇALHO DO PERFIL
+        ========================== -->
+
+        <div class="perfil-header">
+          <div class="dados">
+            <h2 id="nomeText"></h2>
+
+            <p id="emailText"></p>
+          </div>
+        </div>
+
+
+        <!-- =========================
+             RECADO
+        ========================== -->
+
+        <div class="msg">
+          <h4>Deixe um recado:</h4>
+
+          <textarea
+            name="recado"
+            id="recado"
+            maxlength="200"
+          ></textarea>
+        </div>
+
+
+        <!-- =========================
+             EVENTOS - CONTADORES
+        ========================== -->
+
+        <div class="eventos">
+
+          <div class="section criados">
+            <h3>Eventos criados</h3>
+
+            <p id="n_eventosCriados"></p>
+          </div>
+
+
+          <div class="section inscritos">
+            <h3>Eventos inscritos</h3>
+
+            <p id="n_eventosInscritos"></p>
+          </div>
+
+        </div>
+
+
+        <!-- =========================
+             LISTAGEM DOS EVENTOS
+        ========================== -->
+
+        <div class="eventos">
+
+          <div id="eventosCriados">
+            <!-- Eventos criados serão inseridos pelo JavaScript -->
+          </div>
+
+
+          <div id="eventosInscritos">
+            <!-- Eventos inscritos serão inseridos pelo JavaScript -->
+          </div>
+
+        </div>
+
+
+        <!-- =========================
+              SALAS - CONTADORES
+        ========================== -->
+
+        <div class="salas">
+
+          <div class="section criados">
+            <h3>Salas criadas</h3>
+
+            <p id="n_salasCriadas"></p>
+          </div>
+
+
+          <div class="section inscritas">
+            <h3>Salas inscritas</h3>
+
+            <p id="n_salasInscritas"></p>
+          </div>
+
+        </div>
+
+        <!-- =========================
+             LISTAGEM DAS SALAS
+        ========================== -->
+
+        <div class="salas">
+
+          <div id="salasCriadas">
+            <!-- salas criadas serão inseridos pelo JavaScript -->
+          </div>
+
+
+          <div id="salasInscritas">
+            <!-- salas inscritas serão inseridos pelo JavaScript -->
+          </div>
+
+        </div>
+        <!-- =========================
+             INFORMAÇÕES ADICIONAIS
+        ========================== -->
+
+        <div class="info">
+
+          <h3>Informações adicionais</h3>
+
+          <textarea
+            name="info"
+            id="info"
+            placeholder="Escreva um breve resumo sobre si mesmo"
+          ></textarea>
+
+        </div>
+
+
+        <!-- =========================
+             QUALIDADES
+        ========================== -->
+
+        <div class="categorias">
+
+          <h4>Escreva abaixo as qualidades que você possui</h4>
+
+          <div class="input-cate">
+
+            <input
+              type="text"
+              id="qualidade"
+              name="qualidade"
+              placeholder="Ex: JavaScript"
+            />
+
+            <button
+              type="button"
+              id="salvar-qualidade"
+            >
+              Salvar
+            </button>
+
+          </div>
+
+
+          <!--
+            As qualidades cadastradas
+            serão colocadas aqui pelo JavaScript.
+          -->
+
+          <div
+            class="listar-qualidade"
+            id="listar-qualidade"
+          ></div>
+
+        </div>
+
+
+        <!-- =========================
+             SALVAR PERFIL
+        ========================== -->
+
+        <button
+          type="submit"
+          id="btn"
+        >
+          Salvar perfil
+        </button>
+
+      </form>
+
+    </div>
+
+ <%- include("../partials/footer") %>
+
+    <script
+      type="module"
+      src="/js/perfil.js"
+    ></script>
+
+  </body>
+</html>

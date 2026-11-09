@@ -1,0 +1,818 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #E2E2E2;
+    font-family: "Reddit Sans", sans-serif;
+    min-height: 100vh;
+}
+
+h1{
+    font-family: "Reddit Sans" sans-serif;
+    font-weight: 600;
+    margin-top: 50px;
+    color: #270057;
+    margin-bottom: 70px;
+}
+
+/* =========================
+   SEM EVENTOS
+========================= */
+
+.sem-eventos {
+    width: 90%;
+    max-width: 750px;
+    margin: 40px auto;
+    padding: 55px 30px;
+    background: white;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+.icone-sem-eventos {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 25px;
+    background: #f2eafa;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sem-eventos h2 {
+    color: #310066;
+    margin-bottom: 12px;
+}
+
+.sem-eventos p {
+    color: #777;
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.btn-criar-evento {
+    display: inline-block;
+    padding: 13px 25px;
+    background: #310066;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-criar-evento:hover {
+    background: #5100a0;
+    transform: translateY(-2px);
+}
+/* =========================
+   CONTAINER DOS EVENTOS
+========================= */
+
+.eventos-container {
+    width: 90%;
+    max-width: 1200px;
+    min-height: 40vh;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+#VerMaisEventos{
+    text-decoration: none;
+    color: #2B0068;
+    font-size: 18px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.evento {
+    width: 100%;
+
+    background-color: #FFFFFF;
+
+    padding: 25px 30px;
+
+    margin-bottom: 40px;
+
+    border-radius: 10px;
+
+    position: relative;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+
+    transition:
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+/* Hover normal */
+
+.evento:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+
+/* =========================
+   CARD EXPANDIDO
+========================= */
+
+.evento.expandido {
+    z-index: 100;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.15);
+}
+
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+.evento-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 20px;
+}
+
+
+/* Título */
+
+.evento-titulo {
+    font-size: 23px;
+    font-weight: 700;
+
+    color: #2B0068;
+}
+
+
+/* Quantidade de pessoas */
+
+.evento-pessoas {
+    color: #666666;
+
+    font-size: 14px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================
+   AÇÕES
+========================= */
+
+.evento-acoes {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+
+/* =========================
+   BOTÃO INSCREVER
+========================= */
+
+.btn-inscrever {
+    background-color: #2B0068;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 6px;
+
+    padding: 11px 25px;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.btn-inscrever:hover {
+    background-color: #4600A8;
+
+    transform: translateY(-1px);
+}
+
+/* =========================
+   BOTÃO VISUALIZAR
+========================= */
+
+#btnVisualizar{
+    border: #2B0068 2px solid;
+
+    background-color: transparent;
+
+     border-radius: 6px;
+
+    padding: 9px 23px;
+
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    font-family: "Reddit Sans", sans-serif;
+
+    color: #2B0068;
+
+    position: absolute;
+    left: 180px;
+
+    transition: 0.2s ease;
+}
+
+#btnVisualizar:hover{
+    transform: translateY(-1px);
+    border-color: #6B20C5;
+    transition: 0.2s ease;
+}
+
+#btnVisualizar a{
+    text-decoration: none;
+}
+
+
+/* =========================
+   BOTÃO VER MAIS
+========================= */
+
+.btn-expandir {
+    background: transparent;
+
+    border: none;
+
+    color: #2B0068;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    transition: color 0.2s ease;
+}
+
+.btn-expandir:hover {
+    color: #6B20C5;
+}
+
+
+/* =========================
+   SETA
+========================= */
+
+.seta {
+    font-size: 20px;
+
+    line-height: 10px;
+
+    transition: transform 0.3s ease;
+}
+
+
+/* Gira a seta quando expandido */
+
+.evento.expandido .btn-expandir .seta {
+    transform: rotate(180deg);
+}
+
+
+/* =========================
+   ÁREA EXPANDIDA
+========================= */
+
+.evento-descricao {
+
+    position: absolute;
+
+    top: calc(100% - 10px);
+
+    left: 0;
+
+    width: 100%;
+
+    background-color: #FFFFFF;
+
+    border-radius: 0 0 10px 10px;
+
+    border-top: 1px solid #EAEAEA;
+
+    padding: 35px 30px 25px;
+
+    color: #555555;
+
+    line-height: 1.7;
+
+    overflow-wrap: break-word;
+
+    /*
+        Menor que o card.
+        Assim a extensão fica atrás dele.
+    */
+    z-index: -1;
+
+    /*
+        Estado inicial
+    */
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform: translateY(-20px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.12);
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.35s ease,
+        visibility 0.35s ease;
+}
+
+
+/* =========================
+   ÁREA EXPANDIDA ABERTA
+========================= */
+
+.evento.expandido .evento-descricao {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: translateY(0);
+}
+
+
+/* =========================
+   TÍTULO DA DESCRIÇÃO
+========================= */
+
+.evento-descricao h3 {
+
+    color: #2B0068;
+
+    font-size: 18px;
+
+    margin-bottom: 12px;
+}
+
+
+/* =========================
+   INFORMAÇÕES
+========================= */
+
+.evento-descricao p {
+
+    margin-bottom: 12px;
+
+    font-size: 15px;
+}
+
+
+/* =========================
+   BOTÃO RECOLHER
+========================= */
+
+.btn-recolher {
+
+    margin-top: 15px;
+
+    background: transparent;
+
+    border: none;
+
+    color: #2B0068;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    transition: color 0.2s ease;
+}
+
+.btn-recolher:hover {
+    color: #6B20C5;
+}
+
+.btn-recolher img{
+    transform: rotate(180deg);
+}
+
+#inscricoesInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+}
+
+#inscricoesInfo .inscritostxt{
+    position: absolute;
+    right: 5px;
+    color: #2B0068;
+    font-weight: 700;
+
+}
+/* =========================
+   CONTAINER DOS USUÁRIOS
+========================= */
+
+.usuarios-container {
+
+    width: 90%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 60px auto;
+
+}
+
+
+/* =========================
+   CARD DO USUÁRIO
+========================= */
+
+.usuario-card {
+
+    width: 60%;
+
+    background-color: #FFFFFF;
+
+    padding: 20px 25px;
+
+    margin-bottom: 18px;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.08);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+
+}
+#maisUsuarios{
+    text-decoration: none;
+    color: #2B0068;
+    font-size: 18px;
+}
+
+/* =========================
+   HOVER
+========================= */
+
+.usuario-card:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.12);
+
+}
+
+
+/* =========================
+   AVATAR
+========================= */
+
+.usuario-avatar {
+
+    width: 58px;
+
+    height: 58px;
+
+    min-width: 58px;
+
+    border-radius: 50%;
+
+    background-color: #2B0068;
+
+    color: #FFFFFF;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 24px;
+
+    font-weight: 700;
+
+}
+
+
+/* =========================
+   INFORMAÇÕES
+========================= */
+
+.usuario-info {
+
+    flex: 1;
+
+    min-width: 0;
+
+}
+
+
+.usuario-nome {
+
+    color: #2B0068;
+
+    font-size: 19px;
+
+    font-weight: 700;
+
+    margin-bottom: 4px;
+
+}
+
+
+.usuario-email {
+
+    color: #666666;
+
+    font-size: 14px;
+
+    margin-bottom: 10px;
+
+}
+
+
+/* =========================
+   QUALIDADES
+========================= */
+
+.usuario-qualidades {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+}
+
+
+.qualidade {
+
+    background-color: #F0E8FF;
+
+    color: #2B0068;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+}
+
+
+/* =========================
+   BOTÃO VISUALIZAR
+========================= */
+
+.btn-visualizar {
+
+    background-color: #2B0068;
+
+    color: #FFFFFF;
+
+    text-decoration: none;
+
+    border-radius: 6px;
+
+    padding: 10px 18px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+.btn-visualizar:hover {
+
+    background-color: #4600A8;
+
+    transform: translateY(-1px);
+
+}
+
+
+/* =========================
+   NENHUM USUÁRIO
+========================= */
+
+.nenhum-usuario {
+
+    color: #666666;
+
+    font-size: 15px;
+
+}
+
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 700px) {
+
+    .usuarios-container {
+
+        width: 94%;
+
+        margin-top: 40px;
+
+    }
+
+
+    .usuario-card {
+
+        align-items: flex-start;
+
+        flex-wrap: wrap;
+
+        padding: 18px;
+
+    }
+
+
+    .usuario-info {
+
+        width: calc(100% - 78px);
+
+    }
+
+
+    .btn-visualizar {
+
+        width: 100%;
+
+        text-align: center;
+
+        margin-top: 5px;
+
+    }
+
+}
+
+
+@media (max-width: 450px) {
+
+    .usuario-card {
+
+        gap: 12px;
+
+    }
+
+
+    .usuario-avatar {
+
+        width: 50px;
+
+        height: 50px;
+
+        min-width: 50px;
+
+        font-size: 20px;
+
+    }
+
+
+    .usuario-nome {
+
+        font-size: 17px;
+
+    }
+
+
+    .usuario-email {
+
+        font-size: 13px;
+
+    }
+
+}
+
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 600px) {
+
+    .eventos-container {
+
+        width: 94%;
+
+        margin-top: 25px;
+
+
+    }
+
+    .evento {
+
+        padding: 20px;
+        border-bottom: #2B0068 2px solid;
+    }
+
+    .evento-header {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+    .evento-titulo {
+
+        font-size: 20px;
+    }
+
+    .evento-acoes {
+
+        flex-wrap: wrap;
+         border-bottom: #2B0068 2px solid;
+    }
+
+    .evento-descricao {
+
+        padding: 30px 20px 20px;
+    }
+}

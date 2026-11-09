@@ -1,0 +1,222 @@
+
+/* CONFIGURAÇÕES GERAIS */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Reddit Sans", sans-serif;
+    background-color: #E2E2E2;
+    min-height: 100vh;
+    color: #252525;
+}
+
+main {
+    width: 90%;
+    max-width: 1000px;
+    margin: 40px auto;
+}
+
+h1 {
+    color: #2B0068;
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.subtitulo {
+    color: #666;
+    font-size: 15px;
+    margin-bottom: 30px;
+}
+
+
+/* CONTAINER DAS SOLICITAÇÕES */
+
+#solicitacao-container {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* CARD DE SOLICITAÇÃO */
+
+.solicitacao {
+    background-color: #FFFFFF;
+    border-radius: 14px;
+    padding: 24px;
+    border: 1px solid #E0D6EE;
+    box-shadow: 0 4px 12px rgba(43, 0, 104, 0.07);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: 60%;
+}
+
+.solicitacao:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 18px rgba(43, 0, 104, 0.12);
+}
+
+
+/* ÁREA SUPERIOR */
+
+.area-superior {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.usuarioInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 0;
+}
+
+.usuarioInfo h3 {
+    color: #2B0068;
+    font-size: 20px;
+    overflow-wrap: anywhere;
+}
+
+.usuarioInfo h4 {
+    color: #555;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.usuarioInfo p {
+    color: #777;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+
+/* BOTÃO VER PERFIL */
+
+.visualizar button {
+    background-color: #F0E8FA;
+    color: #340272;
+    border: 1px solid #D7C3EF;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: 0.2s ease;
+}
+
+.visualizar button:hover {
+    background-color: #340272;
+    color: #FFFFFF;
+    border-color: #340272;
+}
+
+
+/* ÁREA INFERIOR */
+
+.area-inferior {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid #EEEEEE;
+}
+
+
+/* BOTÕES DE APROVAR E RECUSAR */
+
+.botoesAcao {
+    display: flex;
+    gap: 12px;
+}
+
+.btnPermitir,
+.btnRecusar {
+    min-width: 100px;
+    padding: 11px 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btnPermitir {
+    background-color: #340272;
+    color: #FFFFFF;
+    border: 1px solid #340272;
+}
+
+.btnPermitir:hover {
+    background-color: #4B0791;
+    transform: translateY(-1px);
+}
+
+.btnRecusar {
+    background-color: #FFFFFF;
+    color: #B42318;
+    border: 1px solid #E3B5B2;
+}
+
+.btnRecusar:hover {
+    background-color: #FCE8E6;
+    border-color: #B42318;
+    transform: translateY(-1px);
+}
+
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 600px) {
+
+    main {
+        width: 92%;
+        margin: 25px auto;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    .solicitacao {
+        padding: 18px;
+    }
+
+    .area-superior {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .visualizar {
+        width: 100%;
+    }
+
+    .visualizar button {
+        width: 100%;
+    }
+
+    .area-inferior {
+        margin-top: 18px;
+    }
+
+    .botoesAcao {
+        width: 100%;
+    }
+
+    .btnPermitir,
+    .btnRecusar {
+        flex: 1;
+        min-width: 0;
+    }
+}
