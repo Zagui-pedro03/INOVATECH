@@ -317,16 +317,29 @@ import { auth, db } from "./firebase.js";
                                        </p>
  
                                    </div>
- 
+                                    <div class="btns">
                                    <a href="/salas/sala-geral/${String(i)}" class="verSala">
                                        Visualizar
                                    </a>
- 
+                                        <button id="excluirBtn" onclick="deletarSala('${i}')">Excluir</button>
+                                    </div>
                                </div>
                            `;
                        }
                    }
                 }
+               }
+
+               window.deletarSala = async function(idSala){
+                    const refSala = ref(db, `Salas/${idSala}`)
+                    const dadosSala = await get(refSala)
+                    const sala = dadosSala.val()
+
+                    // =============================
+                    // DELETAR SALA
+                    // =============================
+                if(confirm(`Você realmente deseja excluir a sala: ${sala.nome}?`))
+                    await remove(refSala);
                }
            }
  
@@ -371,10 +384,14 @@ import { auth, db } from "./firebase.js";
                        continue;
                    }
  
-                   if (!salaAtual.nome || !salaAtual.tema) {
+                   if (!salaAtual.nome || !salaAtual.categoria) {
                        continue;
                    }
- 
+                   
+                   if(salaAtual.criador === usuario.uid){
+                    continue;
+                   }
+
                    if (!salaAtual.Integrantes) {
                        continue;
                    }

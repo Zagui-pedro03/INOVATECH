@@ -21,6 +21,7 @@ body {
     color: #2B0068;
     font-size: 20px;
     font-weight: 600;
+    cursor: pointer;
 }
 
 .linkVoltar {

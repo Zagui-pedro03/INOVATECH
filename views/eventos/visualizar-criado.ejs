@@ -21,7 +21,10 @@
 <body>
 
     <%- include("../partials/header") %>
-
+    <div class="linkVoltar">
+    <a id="VoltarSala">Voltar</a>
+    <div class="linha"></div>
+    </div>
     <main class="eventos-container">
         <p id="i" style="display: none;"><%= i %></p>
 
@@ -94,5 +97,12 @@
  <%- include("../partials/footer") %>
  
     <script type="module" src="/js/visualizar-evento-criado.js"></script>
+    <script>
+        let linkVoltar = document.getElementById("VoltarSala")
+
+        linkVoltar.addEventListener("click", () => {
+            window.location.href = "/home/perfil"
+        })
+    </script>
 </body>
 </html>

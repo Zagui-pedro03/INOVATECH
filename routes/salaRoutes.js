@@ -1,4 +1,3 @@
-const { render } = require("ejs");
 const express = require("express")
 const router = express.Router();
 
@@ -68,7 +67,7 @@ router.get("", (req, res) => {
 })
 
 router.get("/solicitacoes", (req, res) => {
-    res.render("salas/solicitacao-sala")
+    res.render("salas/solicitacao")
 })
 
 router.get("/sala-geral/:id", (req, res) => {

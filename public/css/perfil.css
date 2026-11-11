@@ -703,6 +703,29 @@ body {
     text-decoration: none;
 }
 
+.btns{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+#excluirBtn{
+    background-color: rgb(250, 211, 211);
+    border: 1px rgb(91, 0, 0) solid;
+    padding: 10px;
+    border-radius: 8px;
+    font-family: "Reddit Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(66, 0, 0);
+    transition: background 0.2s,
+    color 0.2s;
+    cursor: pointer;
+}
+#excluirBtn:hover {
+    background-color: rgb(63, 0, 0);
+    color: white;
+}
 /* =========================
    RESPONSIVIDADE - TABLETS
 ========================= */

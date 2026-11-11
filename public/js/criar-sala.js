@@ -19,6 +19,16 @@ onAuthStateChanged(auth, async (usuario) => {
         return;
     }
 
+    // ====================================
+    // LINK PARA VOLTAR A INDEX DE SALAS
+    // ====================================
+
+    const voltarbtn = document.getElementById("VoltarSala")
+
+    voltarbtn.addEventListener("click", () => {
+        window.location.href = "/salas"
+    })
+
     const formulario = document.getElementById('formulario')
     const usuarioCurrent = usuario.uid
 

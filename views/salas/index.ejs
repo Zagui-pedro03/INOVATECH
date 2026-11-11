@@ -47,8 +47,8 @@
         </div>
 
    
-    <div class="opcoes criacao" id="criacao">
-        <a href="/salas/criar-sala" id="criar">Criar sala</a>
+    <div class="opcoes criacao" id="criacao" style="cursor: pointer;">
+        <a href="/salas/criar-sala" id="criar" style="cursor: pointer;">Criar sala</a>
         <img src="/assets/img/add_icone.png" width="30" alt="">
     </div>
     <div class="opcoes mensagem" id="mensagem">
@@ -65,11 +65,11 @@
         let optionMessage = document.getElementById("mensagem")
 
         optionCreate.addEventListener("click", () => {
-            window.location.href = "/eventos/criar-evento"
+            window.location.href = "/salas/criar-sala"
         })
 
         optionMessage.addEventListener("click", () => {
-            window.location.href = "/eventos/solicitacoes"
+            window.location.href = "/salas/solicitacoes"
         })
     </script>
 </body>

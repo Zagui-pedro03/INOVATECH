@@ -10,8 +10,33 @@ body {
     background-color: #E2E2E2;
     font-family: "Reddit Sans", "Roboto", sans-serif;
     color: #24212B;
+    position: relative;
 }
 
+.linkVoltar a {
+    text-decoration: none;
+    color: #2B0068;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.linkVoltar {
+    position: relative;
+    top: 20px;
+    left: 20px;
+}
+
+.linkVoltar .linha {
+    width: 0;
+    height: 2px;
+    background-color: #4b1191;
+    transition: width 0.2s ease;
+}
+
+.linkVoltar:hover .linha {
+    width: 60px;
+}
 /* Container principal */
 
 .eventos-container {

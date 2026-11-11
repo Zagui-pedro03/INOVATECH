@@ -24,6 +24,13 @@ sair.addEventListener('click', async () => {
     window.location.href = "/login";
 });
 
+const perfil = document.getElementById('perfil');
+
+  perfil.addEventListener('click', () => {
+      window.location.href = "/home/perfil"
+  })
+  
+
 onAuthStateChanged(auth, async (usuario) => {
 
     if (!usuario) {
