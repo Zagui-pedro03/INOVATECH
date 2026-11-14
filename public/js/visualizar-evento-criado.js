@@ -1,4 +1,3 @@
-
 import { auth, db } from "./firebase.js";
 
 import {
@@ -16,20 +15,23 @@ import {
     remove
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
 
-const sair = document.getElementById('logout');
+const sair = document.getElementById("logout");
 
-sair.addEventListener('click', async () => {
+sair.addEventListener("click", async () => {
     await signOut(auth);
-
     window.location.href = "/login";
 });
 
-const perfil = document.getElementById('perfil');
+// VOLTAR PARA A PÁGINA ANTERIOR
+document.getElementById("VoltarSala").addEventListener('click', () => {
+    window.history.back();
+});
 
-  perfil.addEventListener('click', () => {
-      window.location.href = "/home/perfil"
-  })
-  
+const perfil = document.getElementById("perfil");
+
+perfil.addEventListener("click", () => {
+    window.location.href = "/home/perfil";
+});
 
 onAuthStateChanged(auth, async (usuario) => {
 
@@ -74,9 +76,24 @@ onAuthStateChanged(auth, async (usuario) => {
 
     const dados = evento.val();
 
-    // ===============
-    // Elementos DOM
-    // ===============
+    if (!dados) {
+        alert("Evento não encontrado.");
+        window.location.href = "/home/perfil";
+        return;
+    }
+
+    // =========================
+    // NOME DO CRIADOR DO EVENTO
+    // =========================
+
+    let uidCriador = dados.criador;
+    let refCriador = ref(db, `Usuários/${uidCriador}`);
+    let criadordata = await get(refCriador);
+    let dadosCriador = criadordata.val();
+
+    // =========================
+    // ELEMENTOS DOM
+    // =========================
 
     let nomeEvento = document.getElementById("nomeEvento");
     let temaEvento = document.getElementById("temaEvento");
@@ -88,9 +105,9 @@ onAuthStateChanged(auth, async (usuario) => {
     let local = document.getElementById("local");
     let criador = document.getElementById("criador");
 
-    // ====================
+    // =========================
     // INSERINDO OS DADOS
-    // ====================
+    // =========================
 
     nomeEvento.innerText = dados.nome;
     temaEvento.innerText = dados.tema;
@@ -100,34 +117,46 @@ onAuthStateChanged(auth, async (usuario) => {
     horarioInicio.innerText = dados.horarioInicio;
     horarioTermino.innerText = dados.horarioTermino;
     local.innerText = dados.local;
-    criador.innerText = dadosUsuario.nome;
+    criador.innerText = dadosCriador.nome;
 
     let inscritosDiv = document.getElementById("inscritos");
 
-    let refEvento = ref(db, `Eventos/${iEvento}/Participantes`);
+    let refEvento = ref(db, `Eventos/${iEvento}/Integrantes`);
 
     // =========================
     // LISTAGEM DOS INSCRITOS
     // =========================
 
     onValue(refEvento, async (snapshotInscritos) => {
-        let contador = 0
+
+        let contador = 0;
+
         let dadosInscritos = snapshotInscritos.val();
+
+        const evento = await get(referencia);
+
+        const dadosEvento = evento.val();
 
         if (!dadosInscritos) {
             inscritosDiv.innerText = "Nenhuma inscrição no momento";
             return;
         }
-        inscritosDiv.innerHTML = ""
-        for (let uid in dadosInscritos) {
-            
-            if(dadosInscritos[uid] === "pendente") continue;
 
-            contador ++ 
+        inscritosDiv.innerHTML = "";
+
+        for (let uid in dadosInscritos) {
+
+            if (dadosInscritos[uid] === "pendente") continue;
+            if (dadosEvento.criador === uid) continue;
+
+            contador++;
+
             let refUsuario = ref(db, `Usuários/${uid}`);
 
             let dados = await get(refUsuario);
+
             let infoInscrito = dados.val();
+
             inscritosDiv.innerHTML += `
                 <div class="inscrito">
                     <div class="info-inscrito">
@@ -141,569 +170,759 @@ onAuthStateChanged(auth, async (usuario) => {
                                 Ver perfil
                             </a>
                         </button>
+
+                        <button
+                            type="button"
+                            class="excluirBtn"
+                            id="excluirBtn"
+                            style="display: ${modoEdicao ? "block" : "none"};"
+                            onclick="excluir('${uid}', this)"
+                        >
+                            Remover do evento
+                        </button>
                     </div>
                 </div>
             `;
-
-            
         }
-        if(contador === 0) {
-                inscritosDiv.innerText = "Nenhuma inscrição no momento";
-            }
+
+        if (contador === 0) {
+            inscritosDiv.innerText = "Nenhuma inscrição no momento";
+        }
     });
 
     // =========================
-    // TÉRMINO DA LISTAGEM
+    // REMOVER INTEGRANTE DO EVENTO
     // =========================
+
+    window.excluir = async function(uid, btn) {
+
+        if (!confirm("Deseja realmente remover este integrante do evento?")) {
+            return;
+        }
+
+        try {
+
+            // BUSCAR DADOS DO EVENTO
+
+            const refDadosEvento = ref(db, `Eventos/${iEvento}`);
+
+            const snapshotEvento = await get(refDadosEvento);
+
+            const dadosEventoAtual = snapshotEvento.val();
+
+            if (!dadosEventoAtual) {
+                alert("Evento não encontrado.");
+                return;
+            }
+
+            // REMOVER INTEGRANTE
+
+            const refIntegrante = ref(
+                db,
+                `Eventos/${iEvento}/Integrantes/${uid}`
+            );
+
+            const snapshotIntegrante = await get(refIntegrante);
+
+            if (!snapshotIntegrante.exists()) {
+                alert("Este integrante não está mais inscrito no evento.");
+                return;
+            }
+
+            await remove(refIntegrante);
+
+            // ATUALIZAR QUANTIDADE DE INSCRITOS
+
+            const quantidadeAtual = Number(dadosEventoAtual.inscricoes) || 0;
+
+            const novaQuantidade = Math.max(0, quantidadeAtual - 1);
+
+            await update(refDadosEvento, {
+                inscricoes: novaQuantidade
+            });
+
+
+        } catch (erro) {
+
+            console.error("Erro ao remover integrante:", erro);
+
+            alert("Não foi possível remover o integrante do evento.");
+        }
+    };
+
+    // =========================
+    // CONTROLE DO MODO DE EDIÇÃO
+    // =========================
+
+    let modoEdicao = false;
+
+    const btnEditar = document.getElementById("editar");
+    const iconeEditar = btnEditar.querySelector("img");
+
+    // =========================
+    // EDITAR EVENTO
+    // =========================
+
     window.editar = function () {
+
+        // =========================
+        // CANCELAR EDIÇÃO
+        // =========================
+
+        if (modoEdicao) {
+
+            window.location.reload();
+
+            return;
+        }
+
+        // =========================
+        // ATIVAR MODO DE EDIÇÃO
+        // =========================
+
+        modoEdicao = true;
+
+        iconeEditar.src = "/assets/img/close_icone.png";
+
+        btnEditar.style.backgroundColor = "black";
+
         const btnEnviar = document.getElementById("atualizabtn");
-        btnEnviar.style.display = 'block';
 
+        btnEnviar.style.display = "block";
+
+        // =========================
+        // BOTÕES DE EXCLUSÃO
+        // =========================
+
+        document.querySelectorAll(".excluirBtn").forEach((btn) => {
+            btn.style.display = "block";
+        });
+
+        // =========================
         // NOME
+        // =========================
 
-        let inputNome = document.createElement('input');
+        let inputNome = document.createElement("input");
+
         inputNome.type = "text";
         inputNome.value = nomeEvento.innerText;
-        inputNome.id = 'inputNome';
-        inputNome.className = 'campo-edicao';
+        inputNome.id = "inputNome";
+        inputNome.className = "campo-edicao";
 
         nomeEvento.replaceWith(inputNome);
 
+        // =========================
         // TEMA
+        // =========================
 
         let selectTema = document.createElement("select");
-        selectTema.id = 'selectTema';
-        selectTema.className = 'campo-edicao';
 
-        let optionNada = document.createElement('option');
-        optionNada.value = 'nada';
+        selectTema.id = "selectTema";
+        selectTema.className = "campo-edicao";
+
+        let optionNada = document.createElement("option");
+
+        optionNada.value = "nada";
         optionNada.innerText = "Selecione um tema";
 
         selectTema.appendChild(optionNada);
 
-        let optionTecIno = document.createElement('option');
-        optionTecIno.value = 'Tecnologia e Inovação';
+        let optionTecIno = document.createElement("option");
+
+        optionTecIno.value = "Tecnologia e Inovação";
         optionTecIno.innerText = "Tecnologia e Inovação";
 
         selectTema.appendChild(optionTecIno);
 
         let optionEduc = document.createElement("option");
+
         optionEduc.value = "Educação e Conhecimento";
         optionEduc.innerText = "Educação e Conhecimento";
 
         selectTema.appendChild(optionEduc);
 
         let optionCarre = document.createElement("option");
+
         optionCarre.value = "Carreira e Networking";
         optionCarre.innerText = "Carreira e Networking";
 
         selectTema.appendChild(optionCarre);
 
         let optionSocial = document.createElement("option");
+
         optionSocial.value = "Social";
         optionSocial.innerText = "Social";
 
         selectTema.appendChild(optionSocial);
 
         let optionEsports = document.createElement("option");
+
         optionEsports.value = "Esportes e Atividades Físicas";
         optionEsports.innerText = "Esportes e Atividades Físicas";
 
         selectTema.appendChild(optionEsports);
 
         let optionMusic = document.createElement("option");
+
         optionMusic.value = "Música e Entretenimento";
         optionMusic.innerText = "Música e Entretenimento";
 
         selectTema.appendChild(optionMusic);
 
         let optionArte = document.createElement("option");
+
         optionArte.value = "Arte e Criatividade";
         optionArte.innerText = "Arte e Criatividade";
 
         selectTema.appendChild(optionArte);
 
         let optionCommunity = document.createElement("option");
+
         optionCommunity.value = "Comunidade e Voluntariado";
         optionCommunity.innerText = "Comunidade e Voluntariado";
 
         selectTema.appendChild(optionCommunity);
 
         let optionNature = document.createElement("option");
+
         optionNature.value = "Natureza e Lazer";
         optionNature.innerText = "Natureza e Lazer";
 
         selectTema.appendChild(optionNature);
 
         let optionGastronomy = document.createElement("option");
+
         optionGastronomy.value = "Gastronomia";
         optionGastronomy.innerText = "Gastronomia";
 
         selectTema.appendChild(optionGastronomy);
 
         let optionReligion = document.createElement("option");
+
         optionReligion.value = "Religião e Espiritualidade";
         optionReligion.innerText = "Religião e Espiritualidade";
 
         selectTema.appendChild(optionReligion);
 
         let optionComemorative = document.createElement("option");
+
         optionComemorative.value = "Comemorativo";
         optionComemorative.innerText = "Comemorativo";
 
         selectTema.appendChild(optionComemorative);
 
         let optionChampion = document.createElement("option");
+
         optionChampion.value = "Competições e Torneios";
         optionChampion.innerText = "Competições e Torneios";
 
         selectTema.appendChild(optionChampion);
 
+        // MANTÉM O TEMA QUE JÁ ESTAVA SALVO
+
+        selectTema.value = dados.tema;
+
         temaEvento.replaceWith(selectTema);
 
+        // =========================
         // DESCRIÇÃO
+        // =========================
 
-        let inputDescricao = document.createElement('textarea');
+        let inputDescricao = document.createElement("textarea");
+
         inputDescricao.value = descricaoEvento.innerText;
-        inputDescricao.id = 'inputDescricao';
-        inputDescricao.className = 'campo-edicao';
+        inputDescricao.id = "inputDescricao";
+        inputDescricao.className = "campo-edicao";
 
         descricaoEvento.replaceWith(inputDescricao);
 
+        // =========================
         // LIMITE DE PESSOAS
+        // =========================
 
-        let definirLimitePessoas = document.createElement('select');
-        definirLimitePessoas.id = 'definirLimitePessoas';
-        definirLimitePessoas.className = 'campo-edicao';
+        let definirLimitePessoas = document.createElement("select");
 
-        let optionDefinir = document.createElement('option');
+        definirLimitePessoas.id = "definirLimitePessoas";
+        definirLimitePessoas.className = "campo-edicao";
+
+        let optionDefinir = document.createElement("option");
+
         optionDefinir.value = "definir";
-        optionDefinir.innerText = 'Definir';
+        optionDefinir.innerText = "Definir";
 
-        let optionIlimitado = document.createElement('option');
+        let optionIlimitado = document.createElement("option");
+
         optionIlimitado.value = "ilimitado";
-        optionIlimitado.innerText = 'Ilimitado';
+        optionIlimitado.innerText = "Ilimitado";
 
         definirLimitePessoas.appendChild(optionDefinir);
         definirLimitePessoas.appendChild(optionIlimitado);
 
+        // MANTÉM A CONFIGURAÇÃO DE VAGAS JÁ SALVA
+
+        definirLimitePessoas.value =
+            dados.vagas === "ilimitado" ? "ilimitado" : "definir";
+
         limitePessoas.replaceWith(definirLimitePessoas);
 
-        // RECIPIENTE PARA O INPUT OU TEXTO
+        // =========================
+        // RECIPIENTE PARA INPUT OU TEXTO
+        // =========================
 
-        let recipiente = document.createElement('div');
-        recipiente.id = 'recipienteLimite';
+        let recipiente = document.createElement("div");
+
+        recipiente.id = "recipienteLimite";
 
         definirLimitePessoas.after(recipiente);
 
         function limite() {
 
-            recipiente.innerHTML = '';
+            recipiente.innerHTML = "";
 
-            if (definirLimitePessoas.value === 'definir') {
+            if (definirLimitePessoas.value === "definir") {
 
-                let inputVagas = document.createElement('input');
-                inputVagas.type = 'number';
-                inputVagas.id = 'inputVagas';
-                inputVagas.className = 'campo-edicao';
-                inputVagas.min = '1';
-                inputVagas.placeholder = 'Quantidade de pessoas';
+                let inputVagas = document.createElement("input");
+
+                inputVagas.type = "number";
+                inputVagas.id = "inputVagas";
+                inputVagas.className = "campo-edicao";
+                inputVagas.min = "1";
+                inputVagas.placeholder = "Quantidade de pessoas";
+
+                inputVagas.value = dados.vagas;
 
                 recipiente.appendChild(inputVagas);
 
             } else {
 
-                let labelIlimitado = document.createElement('p');
-                labelIlimitado.innerText = 'Quantidade ilimitada de pessoas';
-                labelIlimitado.id = 'labelIlimitado';
+                let labelIlimitado = document.createElement("p");
+
+                labelIlimitado.innerText = "Quantidade ilimitada de pessoas";
+                labelIlimitado.id = "labelIlimitado";
 
                 recipiente.appendChild(labelIlimitado);
             }
         }
 
-        definirLimitePessoas.addEventListener('change', limite);
+        definirLimitePessoas.addEventListener("change", limite);
 
         limite();
 
+        // =========================
         // DATA
+        // =========================
 
-        let inputData = document.createElement('input');
-        inputData.type = 'date';
+        let inputData = document.createElement("input");
+
+        inputData.type = "date";
         inputData.value = data.innerText;
-        inputData.id = 'inputData';
-        inputData.className = 'campo-edicao';
+        inputData.id = "inputData";
+        inputData.className = "campo-edicao";
 
         data.replaceWith(inputData);
 
+        // =========================
         // LOCAL
+        // =========================
 
-        let inputLocal = document.createElement('input');
-        inputLocal.type = 'text';
+        let inputLocal = document.createElement("input");
+
+        inputLocal.type = "text";
         inputLocal.value = local.innerText;
-        inputLocal.id = 'inputLocal';
-        inputLocal.className = 'campo-edicao';
+        inputLocal.id = "inputLocal";
+        inputLocal.className = "campo-edicao";
 
         local.replaceWith(inputLocal);
 
+        // =========================
         // HORÁRIO DE INÍCIO
+        // =========================
 
-        let inputHorarioInicio = document.createElement('input');
-        inputHorarioInicio.type = 'time';
+        let inputHorarioInicio = document.createElement("input");
+
+        inputHorarioInicio.type = "time";
         inputHorarioInicio.value = horarioInicio.innerText;
-        inputHorarioInicio.id = 'inputHorarioInicio';
-        inputHorarioInicio.className = 'campo-edicao';
+        inputHorarioInicio.id = "inputHorarioInicio";
+        inputHorarioInicio.className = "campo-edicao";
 
         horarioInicio.replaceWith(inputHorarioInicio);
 
+        // =========================
         // HORÁRIO DE TÉRMINO
+        // =========================
 
-        let inputHorarioTermino = document.createElement('input');
-        inputHorarioTermino.type = 'time';
+        let inputHorarioTermino = document.createElement("input");
+
+        inputHorarioTermino.type = "time";
         inputHorarioTermino.value = horarioTermino.innerText;
-        inputHorarioTermino.id = 'inputHorarioTermino';
-        inputHorarioTermino.className = 'campo-edicao';
+        inputHorarioTermino.id = "inputHorarioTermino";
+        inputHorarioTermino.className = "campo-edicao";
 
         horarioTermino.replaceWith(inputHorarioTermino);
 
-        // ADICIONAR USUÁRIOS NA ABA DE INSCRIÇÕES
-
-        const container = document.getElementById("divConvidar")
-
-        let divParticipar = document.createElement('div')
-        divParticipar.id = "divParticipar"
-
-        let h3 = document.createElement('h3')
-        h3.innerText = "Deseja adicionar alguém?"
-
-        let texto = document.createElement("p")
-        texto.innerText = `Clique no botão abaixo`
-
-        let btnProcurar = document.createElement('button')
-        btnProcurar.innerText = "+"
-        btnProcurar.id = "btnProcurar"
-        divParticipar.appendChild(h3)
-        divParticipar.appendChild(texto)
-        divParticipar.appendChild(btnProcurar)
-
-        container.appendChild(divParticipar)
-        
-       btnProcurar.addEventListener('click', () => {
-
-    container.removeChild(divParticipar);
-
-    // TEXTO EXPLICATIVO
-    let p = document.createElement("p");
-    p.innerText = "Escolha uma das opções de busca de usuários:";
-
-    container.appendChild(p);
-
-    // CONTAINER DE BOTÕES DE FILTRO
-    let containerBtn = document.createElement("div");
-    containerBtn.id = "containerBtn";
-
-    let btnNome = document.createElement("button");
-    btnNome.id = "btnNome";
-    btnNome.innerText = "Nomes";
-
-    let btnQualidade = document.createElement("button");
-    btnQualidade.id = "btnQualidade";
-    btnQualidade.innerText = "Qualidades";
-
-    containerBtn.appendChild(btnNome);
-    containerBtn.appendChild(btnQualidade);
-
-    container.appendChild(containerBtn);
-
-    // DIV PARA PESQUISA
-    let divPesquisa = document.createElement("div");
-    divPesquisa.id = "divPesquisa";
-
-    let inputPesquisa = document.createElement("input");
-    inputPesquisa.type = "text";
-    inputPesquisa.id = "inputPesquisa";
-    inputPesquisa.placeholder = "Digite sua pesquisa...";
-
-    let btnPesquisar = document.createElement("button");
-    btnPesquisar.type = "button";
-    btnPesquisar.id = "btnPesquisar";
-    btnPesquisar.innerText = "Pesquisar";
-
-    divPesquisa.appendChild(inputPesquisa);
-    divPesquisa.appendChild(btnPesquisar);
-
-    container.appendChild(divPesquisa);
-
-    // LISTA DE USUÁRIOS
-    let listaUsuarios = document.createElement("div");
-    listaUsuarios.id = "listaUsuarios";
-
-    container.appendChild(listaUsuarios);
-
-    // OCULTAR ATÉ ESCOLHER O FILTRO
-    divPesquisa.style.display = "none";
-    listaUsuarios.style.display = "none";
-
-    let tipoPesquisa = "";
-
-    // =========================
-    // PESQUISAR POR NOME
-    // =========================
-
-    btnNome.addEventListener("click", () => {
-
-        tipoPesquisa = "nome";
-
-        divPesquisa.style.display = "flex";
-        listaUsuarios.style.display = "block";
-
-        inputPesquisa.placeholder = "Digite o nome do usuário";
-
-        inputPesquisa.value = "";
-        listaUsuarios.innerHTML = "";
-
-        inputPesquisa.focus();
-
-    });
-
-    // =========================
-    // PESQUISAR POR QUALIDADE
-    // =========================
-
-    btnQualidade.addEventListener("click", () => {
-
-        tipoPesquisa = "qualidade";
-
-        divPesquisa.style.display = "flex";
-        listaUsuarios.style.display = "block";
-
-        inputPesquisa.placeholder = "Digite a qualidade desejada";
-
-        inputPesquisa.value = "";
-        listaUsuarios.innerHTML = "";
-
-        inputPesquisa.focus();
-
-    });
-
-    // =========================
-    // PESQUISAR USUÁRIOS
-    // =========================
-
-    btnPesquisar.addEventListener("click", async () => {
-
-        listaUsuarios.innerHTML = "";
-
-        let pesquisa = inputPesquisa.value.trim();
-
-        if (pesquisa === "") {
-            listaUsuarios.innerHTML = `<p>Escreva algo para buscar</p>`;
-            return;
-        }
-
-        const refUsuarios = ref(db, "Usuários");
-
-        let getUsuarios = await get(refUsuarios);
-
-        let usuarios = getUsuarios.val();
-
-        if (!usuarios) {
-            listaUsuarios.innerHTML = `<p>Nenhum usuário encontrado.</p>`;
-            return;
-        }
-
         // =========================
-        // LISTAGEM DOS USUÁRIOS
+        // ADICIONAR USUÁRIOS
         // =========================
 
-        for (let i in usuarios) {
+        const container = document.getElementById("divConvidar");
 
-            let currentUsuario = usuarios[i];
+        let divParticipar = document.createElement("div");
 
-            // NÃO LISTAR O PRÓPRIO USUÁRIO
-            if (i === usuario.uid) {
-                continue;
-            }
+        divParticipar.id = "divParticipar";
+
+        let h3 = document.createElement("h3");
+
+        h3.innerText = "Deseja adicionar alguém?";
+
+        let texto = document.createElement("p");
+
+        texto.innerText = "Clique no botão abaixo";
+
+        let btnProcurar = document.createElement("button");
+
+        btnProcurar.innerText = "+";
+        btnProcurar.id = "btnProcurar";
+
+        divParticipar.appendChild(h3);
+        divParticipar.appendChild(texto);
+        divParticipar.appendChild(btnProcurar);
+
+        container.appendChild(divParticipar);
+
+        // =========================
+        // ABRIR PESQUISA DE USUÁRIOS
+        // =========================
+
+        btnProcurar.addEventListener("click", () => {
+
+            container.removeChild(divParticipar);
+
+            // TEXTO EXPLICATIVO
+
+            let p = document.createElement("p");
+
+            p.innerText = "Escolha uma das opções de busca de usuários:";
+
+            container.appendChild(p);
+
+            // CONTAINER DE BOTÕES DE FILTRO
+
+            let containerBtn = document.createElement("div");
+
+            containerBtn.id = "containerBtn";
+
+            let btnNome = document.createElement("button");
+
+            btnNome.id = "btnNome";
+            btnNome.innerText = "Nomes";
+
+            let btnQualidade = document.createElement("button");
+
+            btnQualidade.id = "btnQualidade";
+            btnQualidade.innerText = "Qualidades";
+
+            containerBtn.appendChild(btnNome);
+            containerBtn.appendChild(btnQualidade);
+
+            container.appendChild(containerBtn);
+
+            // DIV PARA PESQUISA
+
+            let divPesquisa = document.createElement("div");
+
+            divPesquisa.id = "divPesquisa";
+
+            let inputPesquisa = document.createElement("input");
+
+            inputPesquisa.type = "text";
+            inputPesquisa.id = "inputPesquisa";
+            inputPesquisa.placeholder = "Digite sua pesquisa...";
+
+            let btnPesquisar = document.createElement("button");
+
+            btnPesquisar.type = "button";
+            btnPesquisar.id = "btnPesquisar";
+            btnPesquisar.innerText = "Pesquisar";
+
+            divPesquisa.appendChild(inputPesquisa);
+            divPesquisa.appendChild(btnPesquisar);
+
+            container.appendChild(divPesquisa);
+
+            // LISTA DE USUÁRIOS
+
+            let listaUsuarios = document.createElement("div");
+
+            listaUsuarios.id = "listaUsuarios";
+
+            container.appendChild(listaUsuarios);
+
+            // OCULTAR ATÉ ESCOLHER O FILTRO
+
+            divPesquisa.style.display = "none";
+            listaUsuarios.style.display = "none";
+
+            let tipoPesquisa = "";
+
             // =========================
-            // VERIFICAR SOLICITAÇÃO
+            // PESQUISAR POR NOME
             // =========================
 
-            let referenciaPendente = ref(
-                db,
-                `Eventos/${iEvento}/Participantes/${i}`
-            );
+            btnNome.addEventListener("click", () => {
 
-            let snapshotPendente = await get(referenciaPendente);
+                tipoPesquisa = "nome";
 
-            let jaSolicitado = snapshotPendente.exists();
+                divPesquisa.style.display = "flex";
+                listaUsuarios.style.display = "block";
+
+                inputPesquisa.placeholder = "Digite o nome do usuário";
+
+                inputPesquisa.value = "";
+                listaUsuarios.innerHTML = "";
+
+                inputPesquisa.focus();
+            });
 
             // =========================
-            // VERIFICAR PESQUISA
+            // PESQUISAR POR QUALIDADE
             // =========================
 
-            let encontrou = false;
+            btnQualidade.addEventListener("click", () => {
 
-            if (tipoPesquisa === "nome") {
+                tipoPesquisa = "qualidade";
 
-                encontrou = currentUsuario.nome
-                    ?.toLowerCase()
-                    .includes(pesquisa.toLowerCase());
+                divPesquisa.style.display = "flex";
+                listaUsuarios.style.display = "block";
 
-            }
+                inputPesquisa.placeholder = "Digite a qualidade desejada";
 
-            if (tipoPesquisa === "qualidade") {
+                inputPesquisa.value = "";
+                listaUsuarios.innerHTML = "";
 
-                for (let j in currentUsuario.qualidades || {}) {
+                inputPesquisa.focus();
+            });
 
-                    let currentQualidade = currentUsuario.qualidades[j];
+            // =========================
+            // PESQUISAR USUÁRIOS
+            // =========================
 
-                    if (
-                        String(currentQualidade)
-                            .toLowerCase()
-                            .includes(pesquisa.toLowerCase())
-                    ) {
-                        encontrou = true;
-                        break;
-                    }
+            btnPesquisar.addEventListener("click", async () => {
 
+                listaUsuarios.innerHTML = "";
+
+                let pesquisa = inputPesquisa.value.trim();
+
+                if (pesquisa === "") {
+                    listaUsuarios.innerHTML = `<p>Escreva algo para buscar</p>`;
+                    return;
                 }
 
-            }
+                const refUsuarios = ref(db, "Usuários");
 
-            if (!encontrou) {
-                continue;
-            }
+                let getUsuarios = await get(refUsuarios);
 
-            // =========================
-            // LISTAR USUÁRIO
-            // =========================
+                let usuarios = getUsuarios.val();
 
-            listaUsuarios.innerHTML += `
+                if (!usuarios) {
+                    listaUsuarios.innerHTML = `<p>Nenhum usuário encontrado.</p>`;
+                    return;
+                }
 
-                <div class="cardUsuario">
+                // =========================
+                // LISTAGEM DOS USUÁRIOS
+                // =========================
 
-                    <div class="infoUsuario">
+                for (let i in usuarios) {
 
-                        <h4>${currentUsuario.nome || "Sem nome"}</h4>
+                    let currentUsuario = usuarios[i];
 
-                        <p>${currentUsuario.email || ""}</p>
+                    // NÃO LISTAR O PRÓPRIO USUÁRIO
 
-                        ${
-                            tipoPesquisa === "qualidade"
-                            ? `
-                                <div class="qualidades">
-                                    ${Object.values(currentUsuario.qualidades || {}).map(qualidade => `
-                                        <span>${qualidade}</span>
-                                    `).join("")}
-                                </div>
-                            `
-                            : ""
+                    if (i === usuario.uid) {
+                        continue;
+                    }
+
+                    // =========================
+                    // VERIFICAR SOLICITAÇÃO
+                    // =========================
+
+                    let referenciaPendente = ref(
+                        db,
+                        `Eventos/${iEvento}/Integrantes/${i}`
+                    );
+
+                    let snapshotPendente = await get(referenciaPendente);
+
+                    let jaSolicitado = snapshotPendente.exists();
+
+                    // =========================
+                    // VERIFICAR PESQUISA
+                    // =========================
+
+                    let encontrou = false;
+
+                    if (tipoPesquisa === "nome") {
+
+                        encontrou = currentUsuario.nome
+                            ?.toLowerCase()
+                            .includes(pesquisa.toLowerCase());
+                    }
+
+                    if (tipoPesquisa === "qualidade") {
+
+                        for (let j in currentUsuario.qualidades || {}) {
+
+                            let currentQualidade = currentUsuario.qualidades[j];
+
+                            if (
+                                String(currentQualidade)
+                                    .toLowerCase()
+                                    .includes(pesquisa.toLowerCase())
+                            ) {
+                                encontrou = true;
+                                break;
+                            }
                         }
+                    }
 
-                    </div>
+                    if (!encontrou) {
+                        continue;
+                    }
 
-                    <button
-                        type="button"
-                        class="btnAdicionar"
-                        data-uid="${i}"
-                        onclick="solicitar('${i}',this)"
-                        ${jaSolicitado ? "disabled" : ""}
-                    >
-                        ${jaSolicitado ? "Pendente" : "Adicionar"}
-                    </button>
+                    // =========================
+                    // LISTAR USUÁRIO
+                    // =========================
 
-                </div>
+                    listaUsuarios.innerHTML += `
 
-            `;
+                        <div class="cardUsuario">
 
-        }
+                            <div class="infoUsuario">
 
-        if (listaUsuarios.innerHTML === "") {
-            listaUsuarios.innerHTML = `<p>Nenhum usuário encontrado.</p>`;
-        }
+                                <h4>${currentUsuario.nome || "Sem nome"}</h4>
 
-    });
+                                <p>${currentUsuario.email || ""}</p>
 
-    // =========================
-    // SOLICITAR PARTICIPAÇÃO
-    // =========================
+                                ${
+                                    tipoPesquisa === "qualidade"
+                                    ? `
+                                        <div class="qualidades">
+                                            ${Object.values(currentUsuario.qualidades || {}).map(qualidade => `
+                                                <span>${qualidade}</span>
+                                            `).join("")}
+                                        </div>
+                                    `
+                                    : ""
+                                }
 
-    window.solicitar = async function(i, btn) {
+                            </div>
 
-        try {
+                            <button
+                                type="button"
+                                class="btnAdicionar"
+                                data-uid="${i}"
+                                onclick="solicitar('${i}',this)"
+                                ${jaSolicitado ? "disabled" : ""}
+                            >
+                                ${jaSolicitado ? "Pendente" : "Adicionar"}
+                            </button>
 
-            // =========================
-            // VERIFICAR SOLICITAÇÃO
-            // =========================
+                        </div>
 
-            let referenciaPendente = ref(
-                db,
-                `Usuários/${i}/PendentesEvento/${iEvento}`
-            );
+                    `;
+                }
 
-            let dadosPendente = await get(referenciaPendente);
+                if (listaUsuarios.innerHTML === "") {
+                    listaUsuarios.innerHTML = `<p>Nenhum usuário encontrado.</p>`;
+                }
+            });
 
-            if (dadosPendente.exists()) {
+        });
+
+        // =========================
+        // SOLICITAR PARTICIPAÇÃO
+        // =========================
+
+        window.solicitar = async function(i, btn) {
+
+            try {
+
+                // =========================
+                // VERIFICAR SOLICITAÇÃO
+                // =========================
+
+                let referenciaPendente = ref(
+                    db,
+                    `Usuários/${i}/PendentesEvento/${iEvento}`
+                );
+
+                let dadosPendente = await get(referenciaPendente);
+
+                if (dadosPendente.exists()) {
+
+                    btn.innerText = "Pendente";
+                    btn.disabled = true;
+
+                    return;
+                }
+
+                // =========================
+                // ENVIAR SOLICITAÇÃO
+                // =========================
+
+                await update(
+                    ref(db, `Usuários/${i}/PendentesEvento`),
+                    {
+                        [iEvento]: "pendente"
+                    }
+                );
+
+                await set(
+                    ref(db, `Eventos/${iEvento}/Integrantes/${i}`),
+                    "pendente"
+                );
+
+                // =========================
+                // ATUALIZAR BOTÃO
+                // =========================
 
                 btn.innerText = "Pendente";
                 btn.disabled = true;
 
-                return;
+                alert("Pedido enviado!");
+
+            } catch (erro) {
+
+                console.error("Erro ao enviar solicitação:", erro);
+
+                alert("Não foi possível enviar o pedido.");
             }
+        };
 
-            // =========================
-            // ENVIAR SOLICITAÇÃO
-            // =========================
-
-            await update(
-                ref(db, `Usuários/${i}/PendentesEvento`),
-                {
-                    [iEvento]: "pendente"
-                }
-            );
-
-            await set(
-                ref(db, `Eventos/${iEvento}/Participantes/${i}`),
-                "pendente"
-            );
-
-            // =========================
-            // ATUALIZAR BOTÃO
-            // =========================
-
-            btn.innerText = "Pendente";
-            btn.disabled = true;
-
-            alert("Pedido enviado!");
-
-        } catch (erro) {
-
-            console.error("Erro ao enviar solicitação:", erro);
-
-            alert("Não foi possível enviar o pedido.");
-
-        }
-
-    };
-
-});
         // =========================
         // ENVIAR E ATUALIZAR EVENTO
         // =========================
 
-        btnEnviar.addEventListener('click', async () => {
+        btnEnviar.addEventListener("click", async () => {
+
+            const inputVagas = document.getElementById("inputVagas");
 
             const resposta = await fetch("/eventos/visualizar-evento/editar", {
                 method: "POST",
+
                 headers: {
                     "Content-Type": "application/json"
                 },
+
                 body: JSON.stringify({
                     nome: inputNome.value,
                     tema: selectTema.value,
                     descricao: inputDescricao.value,
+
                     vagas: definirLimitePessoas.value === "ilimitado"
                         ? "ilimitado"
-                        : Number(document.getElementById("inputVagas").value),
+                        : Number(inputVagas.value),
+
                     data: inputData.value,
                     local: inputLocal.value,
                     horarioInicio: inputHorarioInicio.value,
@@ -711,27 +930,30 @@ onAuthStateChanged(auth, async (usuario) => {
                 })
             });
 
-            let dados = await resposta.json();
+            let resultado = await resposta.json();
 
-            const inputVagas = document.getElementById("inputVagas");
+            // =========================
+            // VALIDAR CAMPOS
+            // =========================
 
             validarCampo(
                 inputNome,
                 document.getElementById("txtNome"),
-                dados.errorNome,
+                resultado.errorNome,
                 "Nome válido"
             );
+
             validarCampo(
                 selectTema,
                 document.getElementById("txtTema"),
-                dados.errorTema,
+                resultado.errorTema,
                 "Tema válido"
             );
 
             validarCampo(
                 inputDescricao,
                 document.getElementById("txtDescricao"),
-                dados.errorDescricao,
+                resultado.errorDescricao,
                 "Descrição válida"
             );
 
@@ -739,59 +961,68 @@ onAuthStateChanged(auth, async (usuario) => {
                 definirLimitePessoas.value === "ilimitado"
                     ? definirLimitePessoas
                     : inputVagas,
+
                 document.getElementById("txtVagas"),
-                dados.errorVagas,
+                resultado.errorVagas,
                 "Limite de pessoas válido"
             );
 
             validarCampo(
                 inputData,
                 document.getElementById("txtData"),
-                dados.errorData,
+                resultado.errorData,
                 "Data válida"
             );
 
             validarCampo(
                 inputLocal,
                 document.getElementById("txtLocal"),
-                dados.errorLocal,
+                resultado.errorLocal,
                 "Local válido"
             );
 
             validarCampo(
                 inputHorarioInicio,
                 document.getElementById("txtHorarioInicio"),
-                dados.errorHorarioInicio,
+                resultado.errorHorarioInicio,
                 "Horário de início válido"
             );
 
             validarCampo(
                 inputHorarioTermino,
                 document.getElementById("txtHorarioTermino"),
-                dados.errorHorarioTermino,
+                resultado.errorHorarioTermino,
                 "Horário de término válido"
             );
 
-            // Se o servidor encontrou erros, interrompe a atualização.
+            // =========================
+            // INTERROMPER SE HOUVER ERROS
+            // =========================
 
             if (!resposta.ok) {
                 return;
             }
 
-            update(ref(db, `Eventos/${iEvento}`), {
+            // =========================
+            // ATUALIZAR FIREBASE
+            // =========================
+
+            await update(ref(db, `Eventos/${iEvento}`), {
+
                 nome: inputNome.value,
                 descricao: inputDescricao.value,
                 tema: selectTema.value,
+
                 vagas: definirLimitePessoas.value === "ilimitado"
                     ? "ilimitado"
                     : Number(inputVagas.value),
+
                 data: inputData.value,
                 local: inputLocal.value,
                 horarioInicio: inputHorarioInicio.value,
                 horarioTermino: inputHorarioTermino.value
-            });
 
-         
+            });
 
             window.location.reload();
         });
@@ -804,16 +1035,21 @@ onAuthStateChanged(auth, async (usuario) => {
     function validarCampo(campo, mensagem, erro, textoValido) {
 
         campo.classList.remove("correto", "errado");
+
         mensagem.classList.remove("erro", "sucesso");
 
         if (erro) {
+
             mensagem.innerText = erro;
             mensagem.classList.add("erro");
+
             campo.classList.add("errado");
 
         } else {
+
             mensagem.innerText = textoValido;
             mensagem.classList.add("sucesso");
+
             campo.classList.add("correto");
         }
 
@@ -824,7 +1060,7 @@ onAuthStateChanged(auth, async (usuario) => {
     // DELETAR EVENTO
     // =========================
 
-    window.deletar = async function () {
+    window.deletar = async function() {
 
         if (confirm("Deseja excluir este evento?")) {
 
@@ -835,7 +1071,5 @@ onAuthStateChanged(auth, async (usuario) => {
             window.location.href = "/home/perfil";
         }
     };
-
-    
 
 });

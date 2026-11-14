@@ -22,6 +22,10 @@ import {
     window.location.href = "/login"
   })
 
+  // VOLTAR PARA A PÁGINA ANTERIOR //
+document.getElementById("VoltarSala").addEventListener('click', () => {
+    window.history.back();
+})
   const perfil = document.getElementById('perfil');
 
   perfil.addEventListener('click', () => {
@@ -80,6 +84,17 @@ const evento = await get(referencia);
 
 const dados = evento.val();
 
+
+// =========================
+// Nome do CRIADOR do evento
+// =========================
+
+  let uidCriador = dados.criador
+  let refCriador = ref(db, `Usuários/${uidCriador}`);
+  let criadordata = await get(refCriador)
+  let dadosCriador = criadordata.val()
+
+
 // ===============
 // Elementos DOM
 // ===============
@@ -108,13 +123,14 @@ const dados = evento.val();
 
   local.innerText = dados.local
 
-  criador.innerText = dadosUsuario.nome;
+  criador.innerText = dadosCriador.nome;
 
   let inscritosDiv = document.getElementById("inscritos")
 
-  let refEvento = ref(db,`Eventos/${iEvento}/Participantes`);
+  let refEvento = ref(db,`Eventos/${iEvento}/Integrantes`);
 
   let inscrito = false
+
   // LISTAGEM DOS INSCRITOS //
 
   onValue(refEvento, async (snapshotInscritos) => {
@@ -130,9 +146,10 @@ const dados = evento.val();
       if(dadosInscritos[uid] === "pendente") continue;
         let refUsuario = ref(db,`Usuários/${uid}`);
         
-       let dados = await get(refUsuario)
-       let infoInscrito = dados.val()
+       let dadosUser = await get(refUsuario)
+       let infoInscrito = dadosUser.val()
 
+      if(uid === dados.criador) continue;
 
         inscritosDiv.innerHTML += `
         <div class="inscrito">
@@ -163,7 +180,7 @@ const dados = evento.val();
   // =======================
 
   let btnInscrever = document.getElementById("inscrito")
-  const referenciaInscricao = ref(db, `Eventos/${iEvento}/Participantes/${usuario.uid}`)
+  const referenciaInscricao = ref(db, `Eventos/${iEvento}/Integrantes/${usuario.uid}`)
 
   btnInscrever.addEventListener("click", async (event) => {
     event.preventDefault()

@@ -31,6 +31,15 @@ if (sair) {
 
 }
 
+// ====================================
+// BTN PARA RETORNAR À PÁGINA ANTERIOR
+// ====================================
+
+
+document.getElementById("VoltarSala").addEventListener('click', () => {
+    window.history.back();
+})
+
 
 // =========================
 // BOTÃO DO PERFIL LOGADO
@@ -606,6 +615,9 @@ onAuthStateChanged(auth, async (usuario) => {
 
                     }
 
+                    if(salaAtual.codigo_evento){
+                        continue;
+                    }
 
                     // =========================
                     // SALAS INSCRITAS
@@ -615,6 +627,8 @@ onAuthStateChanged(auth, async (usuario) => {
                     continue;
                     
                     }
+
+                    
 
                     if (!salaAtual.Integrantes) {
                         continue;

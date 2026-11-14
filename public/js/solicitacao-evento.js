@@ -87,8 +87,8 @@ onAuthStateChanged(auth, async (usuario) => {
 
             // PERCORRER TODOS OS EVENTOS QUE POSSUI O CURRENT USUÁRIO COMO PENDENTE 
 
-            for(let i in currentEvento.Participantes){
-                let currentParticipante = currentEvento.Participantes[i]
+            for(let i in currentEvento.Integrantes){
+                let currentParticipante = currentEvento.Integrantes[i]
 
                 if(i === usuario.uid && currentParticipante === "pendente"){
                     //PRECISA CONTER:
@@ -146,29 +146,34 @@ onAuthStateChanged(auth, async (usuario) => {
     });
     window.permitir = async function(idEvento) {
 
-        const refEvento = ref(db, `Eventos/${idEvento}/Participantes/${usuario.uid}`)
+        const refEvento = ref(db, `Eventos/${idEvento}/Integrantes/${usuario.uid}`)
         let dadosEventoParticipantes = await get(refEvento)
         let eventoParticipantes = dadosEventoParticipantes.val()
 
+
+        let inscricoesRef = ref(db, `Eventos/${idEvento}`);
+        let dadosinscricoes = await get(inscricoesRef)
+        let quantInscritos = dadosinscricoes.val()
+        let inscritos = quantInscritos.inscricoes
         // ATUALIZAR PARA TRUE //
 
         await set(refEvento, true)
         
-        alert("Você está participando deste evento agora")
-
         await remove(ref(db, `Usuários/${usuario.uid}/PendentesEvento/${idEvento}`))
 
-        alert("Excluído da lista de pendentes")
+
+        await update(ref(db, `Eventos/${idEvento}`), {
+    inscricoes: inscritos + 1
+});
     
     }
 
     window.recusar = async function(idEvento){
 
-        const refEvento = ref(db, `Eventos/${idEvento}/Participantes/${usuario.uid}`)
+        const refEvento = ref(db, `Eventos/${idEvento}/Integrantes/${usuario.uid}`)
 
         await remove(refEvento)
         await remove(ref(db, `Usuários/${usuario.uid}/PendentesEvento/${idEvento}`))
 
-        alert("Pedido recusado com sucesso")
     }
 });

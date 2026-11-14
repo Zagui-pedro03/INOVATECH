@@ -230,9 +230,9 @@ onAuthStateChanged(auth, async (usuario) => {
 
             const currentDados = dados[i];
 
-            if(currentDados.codigo_evento){
-                continue;
-            }
+            if (currentDados.codigo_evento !== undefined && currentDados.codigo_evento !== null) {
+    continue;
+}
 
             contador++;
 

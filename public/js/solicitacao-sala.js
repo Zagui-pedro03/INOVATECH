@@ -142,7 +142,7 @@ onAuthStateChanged(auth, async (usuario) => {
 
                                     <div class="visualizar">
                                         <button
-                                            onclick="window.location.href='/perfil/${uid}'"
+                                            onclick="window.location.href='/home/perfil/${uid}'"
                                         >
                                             Ver perfil
                                         </button>
@@ -202,4 +202,6 @@ window.recusar = async function(idUsuario, idSala){
       ref(db, `Usuários/${idUsuario}/Pendentes/${idSala}`)
     )
 };
+
+
 });

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sala-geral: <%=id %></title>
+
+    <link rel="icon" type="image/png" href="/assets/img/favicon/icone_2.png" />
+    <link rel="stylesheet" href="/css/sala-integrantes.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Reddit+Sans:ital,wght@0,200..900;1,200..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="area-superior">
+        <div>
+          <h2 id="nomeSala"></h2>
+          <h3 id="categoriaSala"></h3>
+          <p id="idSala" style="display: none"><%=id %></p>
+        </div>
+        <div class="img">
+          <img
+            src="/assets/img/close-option.png"
+            width="30"
+            height="30"
+            alt=""
+          />
+        </div>
+      </div>
+      <div class="area-lateral">
+        <ul id="canais">
+          <li id="geral" >
+            <a href="/salas/sala-geral/<%=id %>">Geral</a>
+          </li>
+          <li id="avisos"><a href="/salas/sala-avisos/<%=id %>">Avisos</a></li>
+          <li id="integrantes">
+            <a class="ativo" href="/salas/sala-integrantes/<%= id %>">Integrantes</a>
+          </li>
+        </ul>
+      </div>
+      <div class="lista">
+      <div id="integrantesLista"></div>
+    </div>
+    </div>
+    
+
+    <script type="module" src="/js/sala-integrantes.js"></script>
+  </body>
+</html>

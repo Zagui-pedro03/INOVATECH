@@ -34,6 +34,12 @@ onAuthStateChanged(auth, async (usuario) => {
   const idSala = document.getElementById("idSala").innerText;
   console.log(idSala)
 
+  const snapshot = await get(ref(db, `Salas/${idSala}/codigo_evento`));
+
+if (snapshot.exists()) {
+    document.getElementById("integrantes").style.display = "none";
+}
+
   const criador = false
 
   onValue(ref(db, `Salas/${idSala}`), async (snapshotSala) => {

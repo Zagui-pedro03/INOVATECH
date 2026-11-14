@@ -109,7 +109,7 @@ onAuthStateChanged(auth, async (usuario) => {
 
       const refInscricao = ref(
         db,
-        `Eventos/${eventId}/Participantes/${usuario.uid}`
+        `Eventos/${eventId}/Integrantes/${usuario.uid}`
       );
 
       const snapshotInscricao = await get(refInscricao);
@@ -255,8 +255,8 @@ onAuthStateChanged(auth, async (usuario) => {
         // =========================
 
         const inscrito =
-          dadosEvento.Participantes &&
-          dadosEvento.Participantes[usuario.uid];
+          dadosEvento.Integrantes &&
+          dadosEvento.Integrantes[usuario.uid];
 
 
         listaEvento.innerHTML += `
@@ -414,8 +414,8 @@ onAuthStateChanged(auth, async (usuario) => {
           contador++
 
           const inscrito =
-          currentEvento.Participantes &&
-          currentEvento.Participantes[usuario.uid];
+          currentEvento.Integrantes &&
+          currentEvento.Integrantes[usuario.uid];
           
           // LISTAGEM DOS EVENTOS QUE POSSUEM O TEXTO DA CAIXA DE PESQUISA //
           listaEvento.innerHTML += `

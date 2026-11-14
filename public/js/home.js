@@ -101,7 +101,7 @@ onAuthStateChanged(auth, async (usuario) => {
 
       const refInscricao = ref(
         db,
-        `Eventos/${eventId}/Participantes/${usuario.uid}`
+        `Eventos/${eventId}/Integrantes/${usuario.uid}`
       );
 
       const snapshotInscricao = await get(refInscricao);
@@ -128,7 +128,7 @@ onAuthStateChanged(auth, async (usuario) => {
       });
 
       // Entra na sala após a inscrição
-      window.location.href = `/salas/sala-geral/${eventId}`;
+      window.location.href = `/salas/sala-geral/${evento.codigo_sala}`;
 
     } catch (erro) {
       console.error("Erro ao realizar inscrição:", erro);
@@ -251,8 +251,8 @@ window.visualizar = async function(sala){
           // =========================
   
           const inscrito =
-            dadosEvento.Participantes &&
-            dadosEvento.Participantes[usuario.uid];
+            dadosEvento.Integrantes &&
+            dadosEvento.Integrantes[usuario.uid];
   
   
           listaEvento.innerHTML += `

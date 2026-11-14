@@ -84,4 +84,12 @@ router.get("/sala-avisos/:id", (req, res) => {
         id
     })
 })
+
+router.get("/sala-integrantes/:id", (req,res) => {
+    const id = req.params.id
+
+    res.render("salas/sala-integrantes",{
+        id
+    })
+})
 module.exports = router;

@@ -25,6 +25,7 @@ body {
     position: relative;
     top: 20px;
     left: 20px;
+    width: 40%;
 }
 
 .linkVoltar .linha {
@@ -160,7 +161,7 @@ body {
     display: flex;
     width: 600px;
     background-color: white;
-    padding: 7px;
+    padding: 15px;
     border-radius: 4px;
     justify-content: space-between;
     align-items: center;
@@ -173,17 +174,70 @@ body {
     box-shadow: 0px 2px 15px rgba(56, 0, 102, 0.597);
 }
 
+.visualizar-perfil{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
 .inscrito button {
-    border: none;
-    background-color: #2B0068;
+    border: 1px solid #2B0068;
+    background-color: #e9dbff;
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
+    color: #2B0068;
+    transition: background 0.2s,
+    transform 0.2s;
 }
-
+.inscrito button:hover {
+    border: 1px solid #2B0068;
+    background-color: #1a0142;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #ffffff;
+    transform: translateY(-3px);
+}
 .inscrito button a {
     font-family: "Reddit Sans", sans-serif;
+    color: #270053;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.inscrito button:hover a {
     color: white;
+}
+.inscrito #excluirBtn{
+    border: 1px solid rgb(114, 0, 0);
+    font-family: "Reddit Sans", sans-serif;
+    background-color: #fcbaba;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: rgb(107, 1, 1);
+    transform: background 0.2s,
+    transform 0.2s;
+}
+.inscrito #excluirBtn:hover{
+    border: 1px solid rgb(114, 0, 0);
+    background-color: #420101;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    transform: translateY(-3px);
+}
+
+.inscrito #excluirBtn a {
+    font-family: "Reddit Sans", sans-serif;
+    color: #570000;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.inscrito #excluirBtn:hover a {
+    font-family: "Reddit Sans", sans-serif;
+    color: #ffffff;
     text-decoration: none;
 }
 

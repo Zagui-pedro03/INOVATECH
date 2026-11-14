@@ -323,7 +323,7 @@ onAuthStateChanged(auth, async (usuario) => {
             inscricoes: contadorInscritos + 1,
             tema: tema.value,
             criador: usuarioCurrent,
-            Participantes: {
+            Integrantes: {
             [usuarioCurrent]: true
     }
             

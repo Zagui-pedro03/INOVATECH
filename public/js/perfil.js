@@ -211,14 +211,14 @@ import { auth, db } from "./firebase.js";
                        continue;
                    }
  
-                   if (!eventoAtual.Participantes) {
+                   if (!eventoAtual.Integrantes) {
                        continue;
                    }
                    
                    if(eventoAtual.criador === usuario.uid){
                     continue;
                    }
-                   for (let j in eventoAtual.Participantes) {
+                   for (let j in eventoAtual.Integrantes) {
  
                        if (j === usuario.uid) {
  
@@ -419,7 +419,7 @@ import { auth, db } from "./firebase.js";
  
                                        </div>
  
-                                       <a href="/salas/visualizar/${i}" class="verSala">
+                                       <a href="/salas/sala-geral/${i}" class="verSala">
                                            Visualizar
                                        </a>
  

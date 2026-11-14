@@ -10,6 +10,32 @@ body {
     font-family: "Reddit Sans", sans-serif;
 }
 
+.linkVoltar a {
+    text-decoration: none;
+    color: #2B0068;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.linkVoltar {
+    position: relative;
+    top: 20px;
+    left: 20px;
+    width: 40%;
+}
+
+.linkVoltar .linha {
+    width: 0;
+    height: 2px;
+    background-color: #4b1191;
+    transition: width 0.2s ease;
+}
+
+.linkVoltar:hover .linha {
+    width: 60px;
+}
+
 /* =========================
    CONTEÚDO PRINCIPAL
 ========================= */
