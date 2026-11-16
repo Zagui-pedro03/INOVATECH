@@ -84,6 +84,7 @@ onAuthStateChanged(auth, async (usuario) => {
         continue;
       }
 
+      if(!status) continue;
       // IGNORAR O CRIADOR
 
       if (id === sala.criador) {

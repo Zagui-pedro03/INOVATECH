@@ -31,14 +31,20 @@ if (sair) {
 
 }
 
+
 // ====================================
 // BTN PARA RETORNAR À PÁGINA ANTERIOR
 // ====================================
 
+const voltarSala = document.getElementById("VoltarSala");
 
-document.getElementById("VoltarSala").addEventListener('click', () => {
-    window.history.back();
-})
+if (voltarSala) {
+
+    voltarSala.addEventListener("click", () => {
+        window.history.back();
+    });
+
+}
 
 
 // =========================
@@ -62,7 +68,11 @@ if (perfil) {
 // UID DO USUÁRIO SELECIONADO
 // =========================
 
-const uid = document.getElementById("uid").value.trim();
+const elementoUid = document.getElementById("uid");
+
+const uid = elementoUid
+    ? elementoUid.value.trim()
+    : "";
 
 console.log("UID do perfil:", uid);
 
@@ -131,7 +141,13 @@ function criarCardSala(sala) {
 // LISTAR CARDS
 // =========================
 
-function montarListagem(container, registros, criarCard, mensagem) {
+function montarListagem(
+    container,
+    registros,
+    criarCard,
+    mensagem,
+    tipo = null
+) {
 
     container.innerHTML = "";
 
@@ -161,7 +177,11 @@ function montarListagem(container, registros, criarCard, mensagem) {
             ? registros.length
             : 5;
 
-        for (let i = 0; i < registros.length && i < quantidade; i++) {
+        for (
+            let i = 0;
+            i < registros.length && i < quantidade;
+            i++
+        ) {
 
             const registro = registros[i];
 
@@ -183,6 +203,7 @@ function montarListagem(container, registros, criarCard, mensagem) {
             botao.type = "button";
             botao.className = "verMais";
 
+
             if (mostrarTodos) {
 
                 botao.textContent = "Ver menos";
@@ -193,11 +214,31 @@ function montarListagem(container, registros, criarCard, mensagem) {
 
             }
 
+
             botao.addEventListener("click", () => {
+
+                // =========================
+                // VER MAIS EVENTOS INSCRITOS
+                // =========================
+
+                if (tipo === "eventosInscritos") {
+
+                    window.location.href =
+                        `/eventos/inscritos/${encodeURIComponent(uid)}`;
+
+                    return;
+
+                }
+
+
+                // =========================
+                // DEMAIS LISTAGENS
+                // =========================
 
                 mostrarItens(!mostrarTodos);
 
             });
+
 
             container.appendChild(botao);
 
@@ -297,6 +338,7 @@ onAuthStateChanged(auth, async (usuario) => {
 
         const emailHeader =
             document.getElementById("email");
+
 
         if (primeiraLetra) {
 
@@ -555,7 +597,8 @@ onAuthStateChanged(auth, async (usuario) => {
                     document.getElementById("eventosInscritos"),
                     listaInscritos,
                     criarCardEvento,
-                    "Nenhum evento inscrito."
+                    "Nenhum evento inscrito.",
+                    "eventosInscritos"
                 );
 
             },
@@ -615,20 +658,19 @@ onAuthStateChanged(auth, async (usuario) => {
 
                     }
 
-                    if(salaAtual.codigo_evento){
+                    if (salaAtual.codigo_evento) {
                         continue;
                     }
+
 
                     // =========================
                     // SALAS INSCRITAS
                     // =========================
 
-                    if(salaAtual.criador === uid){
-                    continue;
-                    
+                    if (salaAtual.criador === uid) {
+                        continue;
                     }
 
-                    
 
                     if (!salaAtual.Integrantes) {
                         continue;
@@ -639,7 +681,6 @@ onAuthStateChanged(auth, async (usuario) => {
                         listaInscritas.push(salaAtual);
 
                     }
-                    
 
                 }
 
@@ -673,7 +714,6 @@ onAuthStateChanged(auth, async (usuario) => {
                 // MOSTRAR SALAS INSCRITAS
                 // =========================
 
-                
                 montarListagem(
                     document.getElementById("salasInscritas"),
                     listaInscritas,

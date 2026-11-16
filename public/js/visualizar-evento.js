@@ -158,7 +158,10 @@ const dados = evento.val();
         <p>${infoInscrito.email}</p>
         </div>
         <div class="visualizar-perfil">
-        <button><a href="/eventos/visualizar-evento/participante/${uid}">Ver perfil</a></button>
+        <button><a href=
+        ${uid !== usuario.uid ? `/eventos/visualizar-evento/participante/${uid}`: '/home/perfil'}>
+        Ver perfil
+        </a></button>
         </div>
         </div>
         `

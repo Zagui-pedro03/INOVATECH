@@ -600,9 +600,6 @@ import { auth, db } from "./firebase.js";
  
                await set(ref(db, `Usuários/${usuario.uid}/recado`), recado)
  
-               alert(
-                   "Perfil atualizado!"
-               );
            }
        );
  

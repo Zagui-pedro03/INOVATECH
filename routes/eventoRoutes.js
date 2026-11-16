@@ -368,6 +368,16 @@ router.get("/visualizar-eventos-criados/:uid", (req, res) => {
     })
 })
 
+router.get("/inscritos/:uid", (req, res) => {
+
+    const uid = req.params.uid;
+
+    res.render("eventos/inscritos", {
+        uid
+    });
+
+});
+
 router.get("/solicitacoes", (req, res) => {
     res.render("eventos/solicitacao")
 })
