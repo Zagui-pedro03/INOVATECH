@@ -167,9 +167,9 @@ onAuthStateChanged(auth, async (usuario) => {
 
           </div>
 
-          <a
+         <a
             class="btn-visualizar"
-            href="/home/perfil/${encodeURIComponent(uid)}"
+            href="${uid === usuario.uid ?'/home/perfil' : `/home/perfil/${uid}`}"
           >
             Visualizar perfil
           </a>
@@ -284,7 +284,7 @@ onAuthStateChanged(auth, async (usuario) => {
 
           <a
             class="btn-visualizar"
-            href="/home/perfil/${encodeURIComponent(uid)}"
+            href="${i === usuario.uid ?'/home/perfil' : '/home/perfil/${uid}'}"
           >
             Visualizar perfil
           </a>
